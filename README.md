@@ -7,6 +7,7 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat&logo=typescript&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?style=flat&logo=tailwindcss&logoColor=white)
 ![DeepSeek](https://img.shields.io/badge/DeepSeek-4D6BFE?style=flat)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=flat)
 
 > 0-3 岁新手父母的育儿助手：育儿问答 + 成长档案 + 提醒 + 数字绘本。
 
