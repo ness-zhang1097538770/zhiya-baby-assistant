@@ -1,5 +1,6 @@
 # 知芽（Kids Mind 育儿多智能体）
 
+![状态](https://img.shields.io/badge/%E7%8A%B6%E6%80%81-MVP%20%E5%B7%B2%E5%AE%8C%E6%88%90-2ea44f?style=flat)
 ![Python](https://img.shields.io/badge/Python-3.12-3776AB?style=flat&logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat&logo=fastapi&logoColor=white)
 ![Next.js](https://img.shields.io/badge/Next.js-16-000000?style=flat&logo=nextdotjs&logoColor=white)
