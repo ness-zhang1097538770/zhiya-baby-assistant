@@ -1,0 +1,25 @@
+HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+HTTP Request: POST https://api.baichuan-ai.com/v1/chat/completions "HTTP/1.1 200 "
+[medical] child_id=1 qhash=3beb66cffd25 ok=True reason=ok
+[qa] child=1 conv=31 medical=True risk=L4
+HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+HTTP Request: POST https://api.siliconflow.cn/v1/embeddings "HTTP/1.1 200 OK"
+HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[qa] child=1 conv=32 medical=False risk=L4
+=== 真实冒烟：白名单 child 1（小糯米）===
+配置: medical_enabled=True, whitelist=1, rollout=0
+
+>>> 问题: 宝宝咳嗽三天了，需要吃药吗？
+    路由判断: should_use_medical=True, is_medical=True, 走医疗通道=True
+    risk_level=L4
+    conclusion=20个月大的孩子咳嗽三天，若精神状态好、无其他严重症状，通常不需要立即用药，优先尝试非药物护理。
+    sources=[(2, '婴幼儿早期全面发展具体包括哪些方面'), (6, '亲子陪伴和交流玩耍对婴幼儿有什么作用，家长应该怎么做')]
+
+>>> 问题: 8 个月宝宝辅食应该怎么加
+    路由判断: should_use_medical=True, is_medical=False, 走医疗通道=False
+    risk_level=L4
+    conclusion=8 个月宝宝正处于 6～9 月龄阶段，辅食应每天添加 1～2 次，坚持“一次一种、由少到多、适应 2～3 天再加新食物”，每天种类不少于 4 种并至少包含一种动物性食物、一种蔬菜和一种谷薯类，保持原味、不加盐糖。
+    sources=[(20, '婴儿什么时候开始添加辅食，添加原则、种类、频次和制作要求是什么'), (17, '营养和喂养为什么对婴幼儿重要，家长需要掌握哪些知识')]
+
+=== 冒烟完成 ===

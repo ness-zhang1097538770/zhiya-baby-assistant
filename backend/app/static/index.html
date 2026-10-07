@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>知芽 · 育儿问答（验收界面）</title>
+<style>
+  :root { --brand:#2f7d5b; --bg:#f6f8f7; --card:#fff; --danger:#c0392b; --warn:#d97706; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; background:var(--bg); color:#1f2937; }
+  header { background:var(--brand); color:#fff; padding:14px 16px; font-size:18px; font-weight:600; }
+  .wrap { max-width:720px; margin:0 auto; padding:16px; }
+  .card { background:var(--card); border-radius:12px; padding:16px; margin-bottom:16px; box-shadow:0 1px 3px rgba(0,0,0,.08); }
+  .card h2 { margin:0 0 12px; font-size:16px; }
+  label { display:block; font-size:13px; color:#4b5563; margin:8px 0 4px; }
+  input, select, textarea { width:100%; padding:10px; border:1px solid #d1d5db; border-radius:8px; font-size:15px; }
+  textarea { min-height:72px; resize:vertical; }
+  .row { display:flex; gap:8px; flex-wrap:wrap; }
+  .row > * { flex:1; min-width:120px; }
+  button { background:var(--brand); color:#fff; border:none; border-radius:8px; padding:10px 16px; font-size:15px; cursor:pointer; margin-top:10px; }
+  button.secondary { background:#e5e7eb; color:#1f2937; }
+  .chip { display:inline-block; background:#eef2ff; color:#4338ca; border-radius:6px; padding:2px 8px; font-size:12px; margin:2px; cursor:pointer; }
+  .chip.active { background:#4338ca; color:#fff; }
+  .msg { margin:10px 0; padding:10px 12px; border-radius:10px; max-width:90%; white-space:pre-wrap; word-break:break-word; }
+  .msg.user { background:#e0f2fe; align-self:flex-end; margin-left:auto; }
+  .msg.bot { background:#f3f4f6; }
+  .risk { font-size:12px; padding:2px 8px; border-radius:6px; color:#fff; display:inline-block; margin-bottom:6px; }
+  .risk.L1 { background:var(--danger); } .risk.L2 { background:var(--warn); }
+  .risk.L3 { background:#ca8a04; } .risk.L4 { background:var(--brand); }
+  .risk.NEED_MORE_INFO { background:#6b7280; }
+  .src { font-size:12px; color:#6b7280; margin-top:6px; }
+  .chat { display:flex; flex-direction:column; max-height:480px; overflow-y:auto; padding:4px; }
+  .hint { font-size:12px; color:#9ca3af; }
+</style>
+</head>
+<body>
+<header>知芽 · 育儿问答（阶段 1 验收界面）</header>
+<div class="wrap">
+  <div class="card">
+    <h2>① 新建儿童档案</h2>
+    <div class="row">
+      <div><label>昵称 *</label><input id="cNick" placeholder="如：小糯米"></div>
+      <div><label>出生日期 *</label><input id="cBirth" type="date"></div>
+    </div>
+    <div class="row">
+      <div><label>性别</label>
+        <select id="cGender"><option value="">未填写</option><option>男</option><option>女</option></select></div>
+      <div><label>喂养方式</label>
+        <select id="cFeed"><option value="">未填写</option><option>母乳喂养</option><option>配方奶喂养</option><option>混合喂养</option><option>已添加辅食</option></select></div>
+    </div>
+    <label>过敏史（选填）</label><input id="cAllergy" placeholder="如：鸡蛋过敏">
+    <div class="row" style="margin-top:10px;">
+      <button onclick="createChild()">创建档案</button>
+      <button class="secondary" onclick="loadChildren()">刷新列表</button>
+    </div>
+    <div id="childList" style="margin-top:10px;"></div>
+  </div>
+
+  <div class="card">
+    <h2>② 育儿问答（选中儿童后提问）</h2>
+    <div id="activeChild" class="hint" style="margin-bottom:8px;">未选择儿童</div>
+    <textarea id="qText" placeholder="如：8 个月的宝宝辅食可以加什么？"></textarea>
+    <button onclick="ask()">提问</button>
+    <div id="chat" class="chat"></div>
+  </div>
+
+  <div class="card">
+    <h2>③ 成长记录</h2>
+    <div class="row">
+      <div style="flex:0 0 40%;"><label>类型</label>
+        <select id="eType"><option value="feeding">喂养</option><option value="sleep">睡眠</option><option value="diaper">排便</option><option value="growth">身高体重</option><option value="milestone">里程碑</option><option value="custom">自定义</option></select></div>
+      <div><label>备注（选填）</label><input id="eNote" placeholder="如：母乳 120ml"></div>
+    </div>
+    <button onclick="addEvent()">保存记录</button>
+  </div>
+
+  <div class="card">
+    <h2>④ 时间线</h2>
+    <select id="tlFilter" onchange="loadTimeline()"><option value="">全部类型</option><option value="feeding">喂养</option><option value="sleep">睡眠</option><option value="diaper">排便</option><option value="growth">身高体重</option><option value="milestone">里程碑</option><option value="custom">自定义</option></select>
+    <button class="secondary" onclick="loadTimeline()">刷新</button>
+    <div id="timeline"></div>
+  </div>
+
+  <div class="card">
+    <h2>⑤ 提醒</h2>
+    <div class="row">
+      <div style="flex:0 0 40%;"><label>类型</label>
+        <select id="rType"><option value="vaccine">疫苗</option><option value="feeding">喂养</option><option value="routine">作息</option><option value="custom">自定义</option></select></div>
+      <div><label>内容</label><input id="rTitle" placeholder="如：打疫苗"></div>
+    </div>
+    <div class="row">
+      <div><label>提醒日期</label><input id="rDate" type="date"></div>
+      <div><label>提醒时间</label><select id="rTime"></select></div>
+    </div>
+    <button onclick="addReminder()">新增提醒</button>
+    <div id="reminderList"></div>
+  </div>
+
+  <div class="card">
+    <h2>⑥ 故事工坊</h2>
+    <div class="row">
+      <div><label>角色名 *</label><input id="sName" placeholder="如：小糯米"></div>
+      <div><label>主题 *</label><input id="sTheme" placeholder="如：刷牙、睡觉、分享"></div>
+    </div>
+    <div class="row">
+      <div><label>性别</label><select id="sGender"><option selected>女孩</option><option>男孩</option></select></div>
+      <div><label>年龄</label><select id="sAge"><option>0-12月</option><option selected>1-2岁</option><option>2-3岁</option></select></div>
+      <div><label>时长</label><select id="sDur"><option>短篇</option><option>中篇</option><option>长篇</option></select></div>
+    </div>
+    <label>教育目标（选填）</label><input id="sGoal" placeholder="如：养成刷牙好习惯">
+    <label>家庭记忆（选填）</label><input id="sMemory" placeholder="如：第一次看到牙刷很好奇">
+    <button onclick="createStory()">生成大纲</button>
+    <div id="storyBox"></div>
+    <h3 style="margin-top:16px;">书架</h3>
+    <div id="shelf"></div>
+  </div>
+</div>
+
+<script>
+let currentChildId = null;
+let currentConvId = null;
+let children = [];
+
+async function createChild() {
+  const nickname = document.getElementById('cNick').value.trim();
+  const birth_date = document.getElementById('cBirth').value;
+  if (!nickname) { alert('请填写昵称'); return; }
+  if (!birth_date) { alert('请选择出生日期'); return; }
+  const payload = { nickname, birth_date };
+  const g = document.getElementById('cGender').value; if (g) payload.gender = g;
+  const f = document.getElementById('cFeed').value; if (f) payload.feeding_method = f;
+  const a = document.getElementById('cAllergy').value.trim(); if (a) payload.allergy_history = a;
+  const r = await fetch('/api/v1/children', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
+  if (!r.ok) { const e = await r.json(); alert('创建失败：' + (e.error?.message || r.status)); return; }
+  const created = await r.json();
+  document.getElementById('cNick').value=''; document.getElementById('cBirth').value='';
+  await loadChildren();
+  selectChild(created.id);   // 新建后自动选中，避免漏选
+}
+
+async function loadChildren() {
+  const r = await fetch('/api/v1/children');
+  const data = await r.json();
+  children = data.items || [];
+  renderChildList();
+  if (!currentChildId && children.length === 1) {
+    selectChild(children[0].id);   // 只有一个儿童时自动选中
+  }
+}
+
+function renderChildList() {
+  const box = document.getElementById('childList');
+  box.innerHTML = '';
+  children.forEach(c => {
+    const span = document.createElement('span');
+    span.className = 'chip' + (c.id === currentChildId ? ' active' : '');
+    span.textContent = `${c.nickname} (${c.birth_date})`;
+    span.onclick = () => selectChild(c.id);
+    box.appendChild(span);
+  });
+}
+
+function selectChild(id) {
+  currentChildId = id;
+  currentConvId = null;
+  const c = children.find(x => x.id === id);
+  document.getElementById('activeChild').textContent = '当前儿童：' + (c ? c.nickname : id);
+  renderChildList();
+  document.getElementById('chat').innerHTML = '';
+  loadTimeline();
+  loadReminders();
+  loadShelf();
+}
+
+async function ask() {
+  if (!currentChildId) { alert('请先选择（创建）儿童档案'); return; }
+  const question = document.getElementById('qText').value.trim();
+  if (!question) { alert('请输入问题'); return; }
+  addMsg('user', question);
+  document.getElementById('qText').value = '';
+  const botEl = addMsg('bot', '');
+  let acc = '';
+
+  const body = { child_id: currentChildId, question };
+  if (currentConvId) body.conversation_id = currentConvId;
+
+  const resp = await fetch('/api/v1/qa', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body) });
+  if (!resp.ok || !resp.body) { const e = await resp.json().catch(()=>({})); botEl.innerHTML = '请求失败：' + (e.error?.message || resp.status); return; }
+
+  const reader = resp.body.getReader();
+  const decoder = new TextDecoder();
+  let buf = '';
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buf += decoder.decode(value, { stream:true });
+    let idx;
+    while ((idx = buf.indexOf('\n\n')) >= 0) {
+      const block = buf.slice(0, idx); buf = buf.slice(idx + 2);
+      handleEvent(block, botEl, () => acc);
+    }
+  }
+}
+
+function handleEvent(block, botEl, getAcc) {
+  let event = 'message', dataStr = '';
+  for (const line of block.split('\n')) {
+    if (line.startsWith('event:')) event = line.slice(6).trim();
+    else if (line.startsWith('data:')) dataStr += line.slice(5).trim();
+  }
+  if (event === 'chunk') {
+    try { const j = JSON.parse(dataStr); botEl.textContent += j.text; } catch(e) {}
+  } else if (event === 'done') {
+    const j = JSON.parse(dataStr);
+    renderDone(j, botEl);
+    currentConvId = j.conversation_id;
+  } else if (event === 'error') {
+    botEl.innerHTML = '⚠️ 出错：' + (JSON.parse(dataStr).error?.message || '未知错误');
+  }
+}
+
+function renderDone(j, botEl) {
+  let html = `<span class="risk ${j.risk_level}">${j.risk_level}${j.risk_level==='NEED_MORE_INFO'?' · 需要补充信息':''}</span>`;
+  html += `<div>${escapeHtml(j.answer)}</div>`;
+  if (j.sources && j.sources.length) {
+    html += `<div class="src">📚 来源：${j.sources.map(s => `《${escapeHtml(s.title)}》(待医学审核)`).join('、')}</div>`;
+  }
+  botEl.innerHTML = html;
+}
+
+function addMsg(role, text) {
+  const chat = document.getElementById('chat');
+  const div = document.createElement('div');
+  div.className = 'msg ' + role;
+  div.textContent = text;
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
+  return div;
+}
+
+function escapeHtml(s) { return (s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+loadChildren();
+populateTimes();
+
+function localNowISO() {
+  const d = new Date();
+  const p = n => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`;
+}
+
+function populateTimes() {
+  const sel = document.getElementById('rTime');
+  for (let h = 0; h < 24; h++) {
+    for (let m of [0, 30]) {
+      const val = String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0');
+      const opt = document.createElement('option');
+      opt.value = val; opt.textContent = val;
+      if (val === '09:00') opt.selected = true;
+      sel.appendChild(opt);
+    }
+  }
+  const d = new Date();
+  const p = n => String(n).padStart(2, '0');
+  document.getElementById('rDate').value = `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}`;
+}
+
+async function addEvent() {
+  if (!currentChildId) { alert('请先选择儿童'); return; }
+  const payload = { type: document.getElementById('eType').value, occurred_at: localNowISO() };
+  const note = document.getElementById('eNote').value.trim();
+  if (note) payload.note = note;
+  const r = await fetch(`/api/v1/children/${currentChildId}/events`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
+  if (!r.ok) { const e = await r.json(); alert('保存失败：' + (e.error?.message || r.status)); return; }
+  document.getElementById('eNote').value = '';
+  loadTimeline();
+}
+
+async function loadTimeline() {
+  if (!currentChildId) { document.getElementById('timeline').innerHTML = '请先选择儿童'; return; }
+  const type = document.getElementById('tlFilter').value;
+  const r = await fetch(`/api/v1/children/${currentChildId}/timeline` + (type ? `?type=${type}` : ''));
+  const data = await r.json();
+  const box = document.getElementById('timeline');
+  box.innerHTML = '';
+  if (!data.groups || !data.groups.length) { box.innerHTML = '<div class="hint">暂无记录</div>'; return; }
+  data.groups.forEach(g => {
+    const h = document.createElement('div');
+    h.style.cssText = 'margin:10px 0 4px;font-weight:600;color:#4b5563;';
+    h.textContent = g.date;
+    box.appendChild(h);
+    g.items.forEach(it => {
+      const line = document.createElement('div');
+      line.style.cssText = 'padding:6px 10px;background:#f9fafb;border-radius:8px;margin:4px 0;font-size:14px;';
+      const label = {feeding:'🍼 喂养',sleep:'😴 睡眠',diaper:'💩 排便',growth:'📏 身高体重',milestone:'🌟 里程碑',custom:'📝 自定义'}[it.type] || it.type;
+      const time = (it.occurred_at || '').slice(11,16);
+      line.textContent = `${label} ${time}${it.note ? ' · ' + it.note : ''}`;
+      box.appendChild(line);
+    });
+  });
+}
+
+async function addReminder() {
+  if (!currentChildId) { alert('请先选择儿童'); return; }
+  const title = document.getElementById('rTitle').value.trim();
+  const date = document.getElementById('rDate').value;
+  const time = document.getElementById('rTime').value;
+  if (!title) { alert('请填写提醒内容'); return; }
+  if (!date) { alert('请选择提醒日期'); return; }
+  const payload = { type: document.getElementById('rType').value, title, remind_at: `${date}T${time}:00` };
+  const r = await fetch(`/api/v1/children/${currentChildId}/reminders`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
+  if (!r.ok) { const e = await r.json(); alert('新增失败：' + (e.error?.message || r.status)); return; }
+  document.getElementById('rTitle').value = '';
+  loadReminders();
+}
+
+async function loadReminders() {
+  if (!currentChildId) { document.getElementById('reminderList').innerHTML = ''; return; }
+  const r = await fetch(`/api/v1/children/${currentChildId}/reminders`);
+  const data = await r.json();
+  const box = document.getElementById('reminderList');
+  box.innerHTML = '';
+  if (!data.items || !data.items.length) { box.innerHTML = '<div class="hint">暂无提醒</div>'; return; }
+  data.items.forEach(it => {
+    const line = document.createElement('div');
+    line.style.cssText = 'padding:8px 10px;background:#fef3c7;border-radius:8px;margin:6px 0;font-size:14px;display:flex;justify-content:space-between;align-items:center;';
+    const label = {vaccine:'💉 疫苗',feeding:'🍼 喂养',routine:'⏰ 作息',custom:'📝 自定义'}[it.type] || it.type;
+    line.innerHTML = `<span>${label} ${escapeHtml(it.title)} <span class="hint">${(it.remind_at||'').slice(0,16).replace('T',' ')}</span>${it.enabled?'':'（已停用）'}</span>`;
+    const del = document.createElement('button');
+    del.className = 'secondary'; del.textContent = '删除'; del.style.cssText = 'margin:0;padding:4px 10px;';
+    del.onclick = async () => { await fetch(`/api/v1/reminders/${it.id}`, {method:'DELETE'}); loadReminders(); };
+    line.appendChild(del);
+    box.appendChild(line);
+  });
+}
+
+let currentStoryId = null;
+
+async function createStory() {
+  if (!currentChildId) { alert('请先选择儿童'); return; }
+  const character_name = document.getElementById('sName').value.trim();
+  const theme = document.getElementById('sTheme').value.trim();
+  if (!character_name || !theme) { alert('请填写角色名和主题'); return; }
+  const payload = { character_name, gender: document.getElementById('sGender').value, theme, age_range: document.getElementById('sAge').value, duration: document.getElementById('sDur').value };
+  const g = document.getElementById('sGoal').value.trim(); if (g) payload.education_goal = g;
+  const m = document.getElementById('sMemory').value.trim(); if (m) payload.family_memory = m;
+  const r = await fetch(`/api/v1/children/${currentChildId}/stories`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
+  if (!r.ok) { const e = await r.json(); alert('创建失败：' + (e.error?.message || r.status)); return; }
+  currentStoryId = (await r.json()).id;
+  document.getElementById('storyBox').innerHTML = '正在生成大纲…';
+  pollStory();
+  loadShelf();
+}
+
+async function pollStory() {
+  if (!currentStoryId) return;
+  const r = await fetch(`/api/v1/stories/${currentStoryId}`);
+  const s = await r.json();
+  const box = document.getElementById('storyBox');
+  if (s.status === 'outline_ready') { renderOutline(s); }
+  else if (s.status === 'content_ready' || s.status === 'ready') { renderContent(s); }
+  else if (s.status === 'failed') { box.innerHTML = '生成失败：' + (s.error || '未知错误'); }
+  else if (s.status === 'cancelled') { box.innerHTML = '已停止生成'; loadShelf(); }
+  else {
+    const msg = s.status === 'assets_generating' ? '正在生成插画和朗读…（约 1-2 分钟）' : '正在生成…';
+    box.innerHTML = `${msg} <button class="secondary" onclick="cancelStory()">停止生成</button>`;
+    setTimeout(pollStory, s.status === 'assets_generating' ? 3000 : 1500);
+  }
+}
+
+async function cancelStory() {
+  const r = await fetch(`/api/v1/stories/${currentStoryId}/cancel`, { method: 'POST' });
+  if (!r.ok) { const e = await r.json(); alert('停止失败：' + (e.error?.message || r.status)); return; }
+  document.getElementById('storyBox').innerHTML = '已停止生成';
+  loadShelf();
+}
+
+function renderOutline(s) {
+  const box = document.getElementById('storyBox');
+  let html = `<p><b>标题：</b><input id="oTitle" value="${escapeHtml(s.outline?.title || '')}" style="width:80%"></p>`;
+  (s.outline?.pages || []).forEach((p, i) => {
+    html += `<p>第${p.page_no}页：<input id="oPage${i}" value="${escapeHtml(p.outline)}" style="width:80%"></p>`;
+  });
+  html += '<button onclick="confirmStory()">确认，生成正文</button>';
+  box.innerHTML = html;
+}
+
+async function confirmStory() {
+  const title = document.getElementById('oTitle').value.trim();
+  const n = document.querySelectorAll('[id^="oPage"]').length;
+  const pages = [];
+  for (let i = 0; i < n; i++) pages.push({ page_no: i + 1, outline: document.getElementById('oPage' + i).value.trim() });
+  const r = await fetch(`/api/v1/stories/${currentStoryId}/confirm`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ outline: { title, pages } }) });
+  if (!r.ok) { const e = await r.json(); alert('确认失败：' + (e.error?.message || r.status)); return; }
+  document.getElementById('storyBox').innerHTML = '正在生成正文…';
+  pollStory();
+}
+
+function renderContent(s) {
+  const box = document.getElementById('storyBox');
+  let html = `<p><b>《${escapeHtml(s.title || '')}》</b></p>`;
+  (s.pages?.pages || []).forEach(p => {
+    const img = (s.images || []).find(i => i.page_no === p.page_no);
+    const aud = (s.audio || []).find(a => a.page_no === p.page_no);
+    html += `<div style="border:1px solid #eee;border-radius:8px;padding:10px;margin:8px 0;"><div><b>第${p.page_no}页</b></div>`;
+    if (img) html += `<img src="${img.url}" style="width:100%;border-radius:8px;margin:6px 0;" />`;
+    html += `<div>${escapeHtml(p.text)}</div>`;
+    if (aud) html += `<audio controls src="${aud.url}" style="width:100%;margin:6px 0;"></audio>`;
+    html += `<div style="color:#6b7280;font-size:13px;">🔊 朗读：${escapeHtml(p.narration)}</div><div style="color:#9ca3af;font-size:12px;">🎨 插画：${escapeHtml(p.image_prompt)}</div></div>`;
+  });
+  if (s.status === 'content_ready') {
+    html += '<button onclick="generateAssets()">生成插画和朗读</button>';
+  }
+  box.innerHTML = html;
+  loadShelf();
+}
+
+async function generateAssets() {
+  const r = await fetch(`/api/v1/stories/${currentStoryId}/assets`, { method: 'POST' });
+  if (!r.ok) { const e = await r.json(); alert('生成失败：' + (e.error?.message || r.status)); return; }
+  document.getElementById('storyBox').innerHTML = '正在生成插画和朗读…（约 1-2 分钟）';
+  setTimeout(pollStory, 3000);
+}
+
+async function loadShelf() {
+  if (!currentChildId) { document.getElementById('shelf').innerHTML = ''; return; }
+  const r = await fetch(`/api/v1/children/${currentChildId}/stories`);
+  const data = await r.json();
+  const box = document.getElementById('shelf');
+  box.innerHTML = '';
+  if (!data.items || !data.items.length) { box.innerHTML = '<div class="hint">书架空空</div>'; return; }
+  data.items.forEach(it => {
+    const div = document.createElement('div');
+    div.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:#f0fdf4;border-radius:8px;margin:6px 0;font-size:14px;';
+    div.innerHTML = `<span>📖 ${escapeHtml(it.title || it.theme)} <span class="hint">${escapeHtml(it.status)}</span></span>`;
+    const btn = document.createElement('button');
+    btn.className = 'secondary'; btn.textContent = '查看'; btn.style.cssText = 'margin:0;padding:4px 10px;';
+    btn.onclick = () => {
+      currentStoryId = it.id;
+      fetch(`/api/v1/stories/${it.id}`).then(r => r.json()).then(s => {
+        if (s.status === 'content_ready' || s.status === 'ready') renderContent(s);
+        else if (s.status === 'outline_ready') renderOutline(s);
+        else if (s.status === 'failed') document.getElementById('storyBox').innerHTML = '生成失败：' + (s.error || '');
+        else pollStory();
+      });
+    };
+    div.appendChild(btn);
+    box.appendChild(div);
+  });
+}
+</script>
+</body>
+</html>

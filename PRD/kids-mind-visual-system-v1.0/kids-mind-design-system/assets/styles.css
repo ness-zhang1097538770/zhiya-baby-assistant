@@ -1,0 +1,80 @@
+@import url('tokens.css');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--leading-normal);
+  color: var(--km-ink);
+  background: var(--km-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: var(--content-max); margin: 0 auto; padding: 0 var(--space-6); }
+section { padding: var(--space-16) 0; border-top: 1px solid var(--km-line); }
+section:first-of-type { border-top: none; }
+
+.eyebrow {
+  font-size: var(--text-eyebrow); font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--km-primary-500); margin-bottom: var(--space-3);
+}
+h1, h2, h3, h4 { font-family: var(--font-display); }
+h2 { font-size: var(--text-h1); font-weight: 700; line-height: var(--leading-tight); letter-spacing: -0.01em; }
+h3 { font-size: var(--text-h2); font-weight: 600; line-height: var(--leading-snug); }
+h4 { font-size: var(--text-h3); font-weight: 600; }
+
+.lead { color: var(--km-ink-secondary); margin-top: var(--space-3); max-width: 70ch; font-size: var(--text-body); }
+
+/* Nav */
+nav {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(245, 242, 236, 0.88);
+  backdrop-filter: saturate(160%) blur(14px);
+  border-bottom: 1px solid var(--km-line);
+}
+nav .wrap { display: flex; align-items: center; gap: var(--space-6); height: 64px; }
+nav .brand { display: flex; align-items: center; gap: var(--space-3); font-family: var(--font-display); font-weight: 700; font-size: 1.125rem; letter-spacing: -0.02em; color: var(--km-ink); }
+nav .brand img { width: 28px; height: 28px; }
+nav ul { display: flex; gap: var(--space-5); list-style: none; margin-left: auto; flex-wrap: wrap; }
+nav a { color: var(--km-ink-secondary); text-decoration: none; font-size: var(--text-small); font-weight: 500; }
+nav a:hover { color: var(--km-primary-500); }
+
+/* Cards / panels */
+.panel {
+  background: var(--km-surface); border: 1px solid var(--km-line); border-radius: var(--radius-xl);
+  padding: var(--space-6); box-shadow: var(--shadow-sm);
+}
+.panel h3, .panel h4 { margin-bottom: var(--space-3); }
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--space-6); margin-top: var(--space-8); }
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-5); margin-top: var(--space-8); }
+.grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--space-4); margin-top: var(--space-8); }
+
+/* Tables */
+table.mini { width: 100%; border-collapse: collapse; font-size: var(--text-small); margin-top: var(--space-5); }
+.mini th, .mini td { text-align: left; padding: var(--space-3) var(--space-4); border-bottom: 1px solid var(--km-line); vertical-align: top; }
+.mini th { font-size: var(--text-eyebrow); letter-spacing: 0.06em; text-transform: uppercase; color: var(--km-ink-muted); font-weight: 600; }
+.mini code { font-family: var(--font-mono); font-size: 11.5px; color: var(--km-primary-700); }
+
+/* Swatches */
+.swatch { border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--km-line); background: var(--km-surface); }
+.swatch .chip { height: 88px; }
+.swatch .body { padding: var(--space-3) var(--space-4) var(--space-4); }
+.swatch strong { display: block; font-family: var(--font-display); font-size: var(--text-small); }
+.swatch code { font-family: var(--font-mono); font-size: 11px; color: var(--km-ink-muted); }
+.swatch .meta { margin-top: 6px; font-size: 11px; color: var(--km-ink-muted); }
+.badge { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 5px; margin-top: 6px; }
+.badge.pass { background: var(--km-success-100); color: var(--km-success-700); }
+.badge.warn { background: var(--km-warning-100); color: var(--km-warning-700); }
+.badge.info { background: var(--km-info-100); color: var(--km-info-700); }
+
+/* Code blocks */
+pre.code { background: var(--km-bg); border: 1px solid var(--km-line); border-radius: var(--radius-lg); padding: var(--space-5); font-family: var(--font-mono); font-size: var(--text-small); overflow: auto; line-height: 1.7; }
+
+footer { padding: var(--space-12) 0; text-align: center; color: var(--km-ink-muted); font-size: var(--text-small); border-top: 1px solid var(--km-line); }
+
+@media (max-width: 768px) {
+  .wrap { padding: 0 var(--space-4); }
+  nav ul { display: none; }
+  section { padding: var(--space-12) 0; }
+}

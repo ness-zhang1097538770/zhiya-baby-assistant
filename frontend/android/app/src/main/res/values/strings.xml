@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Kids Mind</string>
+    <string name="title_activity_main">Kids Mind</string>
+    <string name="package_name">com.kidsmind.app</string>
+    <string name="custom_url_scheme">com.kidsmind.app</string>
+</resources>

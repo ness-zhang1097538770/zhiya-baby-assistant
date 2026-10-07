@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="kids mind">
+  <defs>
+    <linearGradient id="kmWarmC" x1="8" y1="6" x2="56" y2="58" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FF7A94"/>
+      <stop offset="1" stop-color="#FFB877"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="18" fill="url(#kmWarmC)"/>
+  <g stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" fill="none">
+    <path d="M22 17V47"/>
+    <path d="M25.5 31.5L37 20"/>
+    <path d="M25.5 32.5L37.5 45"/>
+  </g>
+  <circle cx="42.5" cy="16.5" r="4.6" fill="#FFFFFF"/>
+</svg>

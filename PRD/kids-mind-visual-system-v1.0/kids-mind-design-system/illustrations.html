@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Illustrations · Kids Mind</title>
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+.ref-img{width:100%;border-radius:var(--radius-xl);border:1px solid var(--km-line);box-shadow:var(--shadow-sm)}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--space-5);margin-top:var(--space-6)}
+.prompt-card{background:var(--km-bg);border:1px dashed var(--km-line);border-radius:var(--radius-lg);padding:var(--space-5);font-family:var(--font-mono);font-size:var(--text-small);line-height:1.7;white-space:pre-wrap}
+.dos-donts{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-5);margin-top:var(--space-6)}
+.dos-donts .ok{background:var(--km-success-50);border:1px solid var(--km-success-100);border-radius:var(--radius-lg);padding:var(--space-5)}
+.dos-donts .no{background:var(--km-danger-50);border:1px solid var(--km-danger-100);border-radius:var(--radius-lg);padding:var(--space-5)}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a href="index.html" class="brand"><img src="../kids-mind-brand/assets/logo-a-sprout.svg" alt=""> kids mind</a>
+    <ul>
+      <li><a href="index.html">总览</a></li>
+      <li><a href="tokens.html">Token</a></li>
+      <li><a href="icons.html">图标</a></li>
+      <li><a href="components.html">组件</a></li>
+      <li><a href="pages.html">页面</a></li>
+      <li><a href="illustrations.html">插画</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section style="padding-top:var(--space-12)">
+  <div class="wrap">
+    <div class="eyebrow">08 / Illustrations</div>
+    <h2>插画与图像风格基准</h2>
+    <p class="lead">本产品插画统一为「暖调水彩绘本风」：柔和边缘、低饱和、无写实照片感，人物以剪影/背影/侧脸为主，避免直接呈现婴幼儿面部细节。</p>
+
+    <h3 style="margin-top:var(--space-10)">风格参考图</h3>
+    <div class="grid-3">
+      <div class="panel" style="padding:var(--space-4)">
+        <img class="ref-img" src="assets/illustrations/A_gentle_watercolor_children_s_2026-09-19T08-45-25.png" alt="空状态插画参考">
+        <p style="margin-top:var(--space-3);font-weight:600">空状态插画</p>
+        <p style="font-size:var(--text-small);color:var(--km-ink-secondary)">温暖奶油底 + 小动物 + 萌芽元素，用于无记录 / 无搜索结果。</p>
+      </div>
+      <div class="panel" style="padding:var(--space-4)">
+        <img class="ref-img" src="assets/illustrations/A_dreamy_watercolor_children_s_2026-09-19T08-45-27.png" alt="故事封面参考">
+        <p style="margin-top:var(--space-3);font-weight:600">故事封面 16:9</p>
+        <p style="font-size:var(--text-small);color:var(--km-ink-secondary)">粉橘晚霞 + 鼠尾草绿海面，人物剪影，预留顶部/底部文字区。</p>
+      </div>
+      <div class="panel" style="padding:var(--space-4)">
+        <img class="ref-img" src="assets/illustrations/A_cozy_flat_watercolor_childre_2026-09-19T08-45-27.png" alt="引导插画参考">
+        <p style="margin-top:var(--space-3);font-weight:600">首次引导插画</p>
+        <p style="font-size:var(--text-small);color:var(--km-ink-secondary)">明亮育婴室 + 绿植 + 亲子互动，传递温柔与安全。</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:var(--space-10)">AI 提示词模板</h3>
+    <div class="prompt-card">A gentle watercolor children's book illustration: [主体描述], warm cream and sage green color palette with soft coral/apricot accents, minimal clean background, picture book style, warm and safe mood, no text, no realistic photo, no scary or dark elements.</div>
+
+    <h3 style="margin-top:var(--space-10)">执行规范</h3>
+    <div class="dos-donts">
+      <div class="ok">
+        <h4 style="color:var(--km-success-700);margin-bottom:var(--space-3)">✓ 推荐</h4>
+        <ul style="padding-left:var(--space-5);font-size:var(--text-small);color:var(--km-ink-secondary);line-height:1.8">
+          <li>水彩 / 水粉绘本风，边缘柔和</li>
+          <li>主色：奶油、鼠尾草绿、陶土橙、粉橘</li>
+          <li>人物以背影、剪影、侧脸为主</li>
+          <li>封面 16:9，头像/占位 1:1</li>
+          <li>留白给文字，主体占比 40–60%</li>
+        </ul>
+      </div>
+      <div class="no">
+        <h4 style="color:var(--km-danger-700);margin-bottom:var(--space-3)">✕ 禁用</h4>
+        <ul style="padding-left:var(--space-5);font-size:var(--text-small);color:var(--km-ink-secondary);line-height:1.8">
+          <li>写实照片风、3D 渲染、霓虹高饱和</li>
+          <li>恐怖、暗黑、血腥、过度夸张表情</li>
+          <li>直接呈现婴幼儿正面清晰五官</li>
+          <li>复杂背景抢占文字可读性</li>
+          <li>与品牌色冲突的冷色大色块</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="margin-top:var(--space-10)">导出规格</h3>
+    <table class="mini">
+      <tr><th>场景</th><th>比例</th><th>格式</th><th>压缩</th></tr>
+      <tr><td>故事封面</td><td>16:9（1536×1024）+ 1:1（1024×1024）</td><td>WebP / PNG 兜底</td><td>WebP 85%</td></tr>
+      <tr><td>空状态 / 引导插画</td><td>1:1 或 4:3</td><td>WebP / PNG</td><td>WebP 85%</td></tr>
+      <tr><td>头像占位</td><td>1:1</td><td>SVG / PNG</td><td>—</td></tr>
+      <tr><td>加载失败兜底</td><td>随容器</td><td>SVG（单色）/ PNG</td><td>—</td></tr>
+    </table>
+  </div>
+</section>
+
+<footer><div class="wrap">Kids Mind Design System · Illustrations v1.0</div></footer>
+</body>
+</html>

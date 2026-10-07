@@ -1,0 +1,19 @@
+真实冒烟（2026-09-23）：上传照片生成绘本角色 · 完整 HTTP 链路
+============================================================
+
+测试照片：PIL 生成的一张模拟孩子照片（人脸 + 头发 + 衣服）。
+
+【1. 上传照片转卡通】POST /api/v1/stories/photo
+  返回 200，character_image = /story_assets/characters/54f2de9d7746458c9a1a4f46ff7d703c.png
+  （真实调用 Qwen-Image-Edit，照片 → 绘本卡通角色形象，输出约 936KB PNG）
+
+【2. 创建故事带角色形象】POST /api/v1/children/1/stories
+  返回 201，status = character_generating，character_image 已带上
+
+【3. 角色 Agent 生成】等待后 status = character_ready
+  character_image 保留：/story_assets/characters/54f2de9d7746458c9a1a4f46ff7d703c.png
+  hero.look：1-2岁的圆脸蛋小女孩，脸颊像小汤圆一样软软鼓鼓…黑色短发扎成两个小揪揪…奶白色短袖棉布睡衣…
+  art_style：温暖水彩童趣风（与照片转卡通的风格一致，说明角色设定正确对齐了卡通形象风格）
+
+结论：上传照片 → 转卡通角色形象 → 创建故事 → 角色 Agent 全链路真实跑通；
+原照片只在内存处理、未落盘，只保留卡通角色形象图。

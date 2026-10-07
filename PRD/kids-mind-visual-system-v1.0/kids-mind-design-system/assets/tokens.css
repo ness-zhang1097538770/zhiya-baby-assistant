@@ -1,0 +1,133 @@
+/**
+ * Kids Mind 视觉系统 · Design Tokens v1.0
+ * 基于已确认的「心智萌芽」品牌标识与现有暖米+深绿+橙陶土基调刷新。
+ */
+
+:root {
+  /* ---------- Brand / Primary ---------- */
+  --km-primary-50:  #FDF3EE;
+  --km-primary-100: #F7D7C9;
+  --km-primary-300: #EC9E7F;
+  --km-primary-500: #D86B4C;   /* 主按钮、关键强调 */
+  --km-primary-700: #A84A2E;   /* 按下 / hover 深 */
+  --km-primary-900: #7A3320;
+  --km-primary-pressed: #8F3C24;
+  --km-primary-disabled: rgba(216, 107, 76, 0.42);
+
+  /* 品牌渐变，仅用于 Logo、Hero、品牌卡片 */
+  --km-brand-gradient: linear-gradient(135deg, #FF7A94 0%, #FFB877 100%);
+
+  /* ---------- Secondary ---------- */
+  --km-sage-50:  #EEF5F1;
+  --km-sage-100: #DCE9E2;
+  --km-sage-300: #A7C8BA;
+  --km-sage-500: #7AA895;      /* 成功、成长、自然标签 */
+  --km-sage-700: #4F7A66;
+
+  --km-cream-50:  #FFF9EF;
+  --km-cream-100: #F7E8C6;     /* 高亮卡片、提示背景 */
+  --km-cream-300: #ECD096;
+
+  --km-sky-50:  #EDF6FA;
+  --km-sky-100: #D2E8F2;
+  --km-sky-500: #6CA3BE;       /* 信息 / 链接 */
+  --km-sky-700: #3E6F87;
+
+  /* ---------- Neutral ---------- */
+  --km-ink:        #2A3633;    /* 主文字；替换原 #193b36，避免过冷 */
+  --km-ink-strong: #102D29;    /* 最大强调 */
+  --km-ink-secondary:#5E716C;  /* 次要文字 */
+  --km-ink-muted:  #8B9894;    /* 辅助/禁用文字 */
+  --km-ink-disabled:rgba(42, 54, 51, 0.38);
+
+  --km-bg:         #F5F2EC;    /* 页面底色（沿用并刷新） */
+  --km-surface:    #FFFDF8;    /* 卡片、浮层面 */
+  --km-surface-elevated: #FFFFFF;
+  --km-surface-hover: #F9F7F1;
+
+  --km-line:       #E8E4DC;    /* 分隔线、边框 */
+  --km-line-strong:#D9D3C8;
+
+  /* ---------- Semantic ---------- */
+  --km-success-50: #E9F5EF; --km-success-100:#D1EBDC; --km-success-500:#3C8D6F; --km-success-700:#27684F;
+  --km-warning-50: #FDF5E6; --km-warning-100:#F8E4C0; --km-warning-500:#C98A1F; --km-warning-700:#8F5F0F;
+  --km-danger-50:  #FBECEA; --km-danger-100:#F5D0CB; --km-danger-500: #B84D43; --km-danger-700: #883429;
+  --km-info-50:    #EBF4F9; --km-info-100:  #D2E8F2; --km-info-500:   #4A85A8; --km-info-700:   #2F5C76;
+
+  /* ---------- Medical Risk (色盲友好，必须配合图标使用) ---------- */
+  --km-risk-high-50:   #F8E6EA; --km-risk-high-500:   #A8324B; --km-risk-high-700:   #7A1F32;
+  --km-risk-medium-50: #F8EFDB; --km-risk-medium-500: #B87A1E; --km-risk-medium-700: #82530F;
+  --km-risk-low-50:    #E9F5EF; --km-risk-low-500:    #3C8D6F; --km-risk-low-700:    #27684F;
+  --km-disclaimer-bg:  #F0EFEA; --km-disclaimer-text: #5A6B68; --km-disclaimer-icon: #7A8890;
+
+  /* ---------- Typography ---------- */
+  --font-display: 'Quicksand', 'Source Han Sans SC', 'Alibaba PuHuiTi 2.0', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-body:    'Inter', 'Source Han Sans SC', 'Alibaba PuHuiTi 2.0', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-mono:    'SF Mono', 'Fira Code', ui-monospace, monospace;
+
+  --text-display: clamp(2.25rem, 4vw + 1rem, 2.75rem);   /* 40-44px */
+  --text-h1:      clamp(1.625rem, 2.5vw + .5rem, 1.875rem); /* 26-30px */
+  --text-h2:      clamp(1.25rem, 1.6vw + .4rem, 1.5rem);    /* 20-24px */
+  --text-h3:      1.125rem;  /* 18px */
+  --text-body:    1rem;      /* 16px */
+  --text-small:   0.875rem;  /* 14px */
+  --text-caption: 0.75rem;   /* 12px */
+  --text-eyebrow: 0.6875rem; /* 11px */
+
+  --leading-tight: 1.2;
+  --leading-snug:  1.4;
+  --leading-normal:1.6;
+  --leading-relaxed:1.75;
+
+  /* ---------- Spacing (8pt 基准) ---------- */
+  --space-1: 0.25rem;  /* 4 */
+  --space-2: 0.5rem;   /* 8 */
+  --space-3: 0.75rem;  /* 12 */
+  --space-4: 1rem;     /* 16 */
+  --space-5: 1.25rem;  /* 20 */
+  --space-6: 1.5rem;   /* 24 */
+  --space-8: 2rem;     /* 32 */
+  --space-10:2.5rem;   /* 40 */
+  --space-12:3rem;     /* 48 */
+  --space-16:4rem;     /* 64 */
+
+  /* ---------- Radius ---------- */
+  --radius-sm:  8px;
+  --radius-md:  12px;
+  --radius-lg:  16px;
+  --radius-xl:  24px;
+  --radius-pill:999px;
+
+  /* ---------- Shadow ---------- */
+  --shadow-xs: 0 1px 2px rgba(42, 54, 51, 0.04);
+  --shadow-sm: 0 2px 8px rgba(42, 54, 51, 0.06);
+  --shadow-md: 0 8px 28px rgba(42, 54, 51, 0.08);
+  --shadow-lg: 0 18px 50px rgba(42, 54, 51, 0.10);
+  --shadow-xl: 0 24px 70px rgba(42, 54, 51, 0.14);
+
+  /* ---------- Layout ---------- */
+  --sidebar-width: 228px;
+  --content-max:   1280px;
+  --bp-mobile: 390px;
+  --bp-tablet: 768px;
+  --bp-desktop: 1280px;
+  --bp-wide: 1440px;
+
+  /* ---------- Motion ---------- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 350ms;
+}
+
+/* 等宽数字，用于年龄、身高体重、日期 */
+.tabular { font-variant-numeric: tabular-nums; }
+
+/* 仅使用 transform/opacity 的通用微交互 */
+@media (prefers-reduced-motion: no-preference) {
+  .motion-safe { transition-property: transform, opacity, box-shadow, background-color, border-color; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .motion-safe { transition: none !important; animation: none !important; }
+}

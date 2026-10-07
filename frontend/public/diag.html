@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>连接诊断</title>
+<style>
+  body { font-family: -apple-system, "PingFang SC", sans-serif; margin: 0; padding: 28px; background: #f6f7f5; color: #1b3a34; }
+  h1 { font-size: 20px; margin: 0 0 6px; }
+  .sub { color: #5f7a72; font-size: 13px; margin-bottom: 18px; }
+  .card { background: #fff; border-radius: 14px; padding: 16px 18px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+  .row { display: flex; justify-content: space-between; gap: 12px; padding: 7px 0; border-bottom: 1px solid #eef1ef; font-size: 14px; }
+  .row:last-child { border-bottom: 0; }
+  .ok { color: #1a7f4b; font-weight: 600; }
+  .bad { color: #c0392b; font-weight: 600; }
+  .wait { color: #8a8f8d; }
+  pre { white-space: pre-wrap; word-break: break-all; font-size: 12px; color: #455; margin: 8px 0 0; }
+</style>
+</head>
+<body>
+<h1>知芽连接诊断</h1>
+<p class="sub">这一页用来确认浏览器能不能跑脚本、能不能连到后端。看完把结果截图即可。</p>
+
+<div class="card">
+  <div class="row"><span>① 浏览器脚本是否运行</span><span id="r-js" class="wait">检测中…</span></div>
+  <div class="row"><span>② 本地存储 localStorage</span><span id="r-ls" class="wait">检测中…</span></div>
+  <div class="row"><span>③ 后端数据接口 /api/v1/children</span><span id="r-api" class="wait">请求中…</span></div>
+  <div class="row"><span>④ 页面脚本是否报错</span><span id="r-err" class="wait">监听中…</span></div>
+</div>
+
+<div class="card">
+  <div class="row"><span>接口返回内容</span><span id="r-count" class="wait">—</span></div>
+  <pre id="r-raw">（等待请求结果）</pre>
+</div>
+
+<script>
+  function set(id, text, cls) {
+    var el = document.getElementById(id);
+    el.textContent = text;
+    el.className = cls || "";
+  }
+
+  var jsErrors = [];
+  window.addEventListener("error", function (e) {
+    jsErrors.push(String(e.message));
+    set("r-err", "有报错：" + e.message, "bad");
+  });
+
+  // ① 脚本运行
+  set("r-js", "正常运行", "ok");
+
+  // ② localStorage
+  try {
+    window.localStorage.setItem("diag", "1");
+    window.localStorage.removeItem("diag");
+    set("r-ls", "可用", "ok");
+  } catch (err) {
+    set("r-ls", "被浏览器禁用（" + err.name + "）", "bad");
+  }
+
+  // ③ 接口请求
+  var t0 = Date.now();
+  fetch("/api/v1/children", { cache: "no-store" })
+    .then(function (res) {
+      return res.text().then(function (body) {
+        var ms = Date.now() - t0;
+        var items = null;
+        try { items = JSON.parse(body).items.length; } catch (e) { items = null; }
+        if (res.ok) {
+          set("r-api", "成功 " + res.status + "（" + ms + " 毫秒）", "ok");
+          set("r-count", items === null ? "解析失败" : "读到 " + items + " 条孩子档案", items === null ? "bad" : "ok");
+          set("r-raw", body.slice(0, 400));
+        } else {
+          set("r-api", "失败 " + res.status, "bad");
+          set("r-count", "—", "");
+          set("r-raw", body.slice(0, 400));
+        }
+      });
+    })
+    .catch(function (err) {
+      set("r-api", "请求失败：" + err.message, "bad");
+      set("r-raw", String(err));
+    });
+
+  setTimeout(function () {
+    var el = document.getElementById("r-err");
+    if (el.className === "wait" || el.textContent === "监听中…") {
+      set("r-err", jsErrors.length ? jsErrors.join(" | ") : "未捕获到报错", "ok");
+    }
+  }, 3000);
+</script>
+</body>
+</html>

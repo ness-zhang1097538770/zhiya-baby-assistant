@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>kids mind · 品牌标识系统 v1.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* ---- Brand color tokens ---- */
+  --km-pink-100:#FFE8ED;
+  --km-pink-300:#FFB3C1;
+  --km-pink-500:#FF7A94;
+  --km-pink-600:#EC4C6B;   /* 大字号文字用，白底 3.6:1 */
+  --km-pink-700:#CE3F63;   /* 正文文字用，白底 4.6:1 */
+  --km-apricot-300:#FFD9AE;
+  --km-apricot-500:#FFB877;
+  --km-mint-100:#DFF6F1;
+  --km-mint-500:#42CEB3;
+  --km-mint-700:#12806C;   /* 白底 4.85:1 */
+  --km-ink:#2E2A3B;
+  --km-ink-soft:#6B6480;
+  --km-ink-mute:#9A93AB;
+  --km-mist:#F7F4F8;
+  --km-line:#EAE4EE;
+  --km-white:#FFFFFF;
+
+  /* ---- Typography ---- */
+  --font-display:'Quicksand',Nunito,'PingFang SC','HarmonyOS Sans SC',system-ui,sans-serif;
+  --font-body:'Inter','PingFang SC','HarmonyOS Sans SC',system-ui,sans-serif;
+
+  /* ---- Spacing (4px base) ---- */
+  --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px; --s-6:24px; --s-8:32px; --s-12:48px; --s-16:64px;
+
+  /* ---- Radius & Shadow ---- */
+  --r-sm:8px; --r-md:14px; --r-lg:22px; --r-xl:32px;
+  --sh-sm:0 1px 2px rgba(46,42,59,.05);
+  --sh-md:0 6px 20px -6px rgba(46,42,59,.12);
+  --sh-lg:0 20px 48px -20px rgba(46,42,59,.22);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-body);
+  background:var(--km-mist);
+  color:var(--km-ink);
+  -webkit-font-smoothing:antialiased;
+  line-height:1.6;
+}
+
+/* ---------- Layout ---------- */
+.wrap{max-width:1120px;margin:0 auto;padding:0 var(--s-6)}
+section{padding:var(--s-16) 0;border-top:1px solid var(--km-line)}
+section:first-of-type{border-top:none}
+.eyebrow{
+  font-family:var(--font-display);font-size:13px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--km-pink-600);margin-bottom:var(--s-3);
+}
+h2{font-family:var(--font-display);font-size:clamp(26px,3.4vw,36px);font-weight:700;letter-spacing:-.02em;line-height:1.2}
+h3{font-family:var(--font-display);font-size:18px;font-weight:700;letter-spacing:-.01em}
+.lead{color:var(--km-ink-soft);margin-top:var(--s-3);max-width:62ch;font-size:15.5px}
+
+/* ---------- Nav ---------- */
+nav{
+  position:sticky;top:0;z-index:20;background:rgba(247,244,248,.85);
+  backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--km-line);
+}
+nav .wrap{display:flex;align-items:center;gap:var(--s-6);height:60px}
+nav .brand{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:700;font-size:17px;letter-spacing:-.02em}
+nav .brand img{width:26px;height:26px}
+nav ul{display:flex;gap:var(--s-5,20px);gap:20px;list-style:none;margin-left:auto;flex-wrap:wrap}
+nav a{color:var(--km-ink-soft);text-decoration:none;font-size:13.5px;font-weight:500}
+nav a:hover{color:var(--km-pink-600)}
+
+/* ---------- Hero ---------- */
+.hero{padding:var(--s-16) 0 var(--s-12)}
+.hero-card{
+  background:var(--km-white);border:1px solid var(--km-line);border-radius:var(--r-xl);
+  padding:var(--s-16) var(--s-12);box-shadow:var(--sh-lg);text-align:center;position:relative;overflow:hidden;
+}
+.hero-card::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(60% 60% at 50% 0%,var(--km-pink-100) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-card > *{position:relative}
+.hero-mark{width:112px;height:112px;margin:0 auto var(--s-6)}
+.hero-word{font-family:var(--font-display);font-size:clamp(40px,7vw,68px);font-weight:700;letter-spacing:-.035em;line-height:1}
+.hero-word em{font-style:normal;color:var(--km-pink-600)}
+.hero-tag{margin-top:var(--s-4);color:var(--km-ink-soft);font-size:15px;letter-spacing:.02em}
+.pill{
+  display:inline-block;margin-top:var(--s-6);padding:6px 14px;border-radius:999px;
+  background:var(--km-mint-100);color:var(--km-mint-700);font-size:12.5px;font-weight:600;
+}
+
+/* ---------- Concepts ---------- */
+.concepts{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:var(--s-6)}
+.concept{
+  background:var(--km-white);border:1px solid var(--km-line);border-radius:var(--r-lg);
+  padding:var(--s-8);box-shadow:var(--sh-sm);transition:transform .3s ease,box-shadow .3s ease;
+}
+.concept:hover{transform:translateY(-3px);box-shadow:var(--sh-md)}
+.concept.reco{border:1.5px solid var(--km-pink-300);box-shadow:0 10px 30px -14px rgba(255,122,148,.45)}
+.tag{
+  display:inline-block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  padding:4px 10px;border-radius:999px;background:var(--km-mist);color:var(--km-ink-soft);margin-bottom:var(--s-4);
+}
+.tag.hot{background:var(--km-pink-100);color:var(--km-pink-700)}
+.stage{
+  height:180px;border-radius:var(--r-md);background:
+    linear-gradient(180deg,var(--km-white),var(--km-mist));
+  display:flex;align-items:center;justify-content:center;gap:24px;margin-bottom:var(--s-6);
+}
+.stage img{width:84px;height:84px}
+.stage .sm{width:44px;height:44px;opacity:.55}
+.concept h3{margin-bottom:6px}
+.concept p{font-size:14px;color:var(--km-ink-soft)}
+
+/* ---------- Generic grid ---------- */
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:var(--s-6);margin-top:var(--s-8)}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:var(--s-4);margin-top:var(--s-8)}
+.grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:var(--s-4);margin-top:var(--s-8)}
+.panel{background:var(--km-white);border:1px solid var(--km-line);border-radius:var(--r-lg);padding:var(--s-6);box-shadow:var(--sh-sm)}
+.panel h3{margin-bottom:var(--s-3)}
+.panel p{font-size:14px;color:var(--km-ink-soft)}
+
+/* ---------- Swatches ---------- */
+.swatch{border-radius:var(--r-md);overflow:hidden;border:1px solid var(--km-line);background:var(--km-white)}
+.chip{height:88px}
+.sw-body{padding:var(--s-3) var(--s-4) var(--s-4)}
+.sw-body strong{display:block;font-family:var(--font-display);font-size:15px}
+.sw-body code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;color:var(--km-ink-soft)}
+.sw-body .meta{margin-top:6px;font-size:12px;color:var(--km-ink-mute)}
+.badge{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:5px;margin-top:6px}
+.badge.pass{background:#E7F7EF;color:#0F6B57}
+.badge.warn{background:#FFF3E2;color:#8A5A16}
+
+/* ---------- Type scale ---------- */
+.type-row{display:flex;align-items:baseline;gap:16px;padding:14px 0;border-bottom:1px dashed var(--km-line)}
+.type-row:last-child{border-bottom:none}
+.type-row .spec{margin-left:auto;font-size:12px;color:var(--km-ink-mute);white-space:nowrap}
+.specimen{font-family:var(--font-display);font-size:44px;font-weight:700;letter-spacing:-.03em}
+.specimen em{font-style:normal;color:var(--km-pink-600)}
+
+/* ---------- Variants ---------- */
+.variant{
+  background:var(--km-white);border:1px solid var(--km-line);border-radius:var(--r-lg);
+  padding:var(--s-6);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--s-3);min-height:170px;
+}
+.variant.dark{background:var(--km-ink);border-color:var(--km-ink)}
+.variant .cap{font-size:12px;color:var(--km-ink-mute);text-align:center}
+.variant.dark .cap{color:#B9B2C7}
+.variant img{height:52px}
+.variant img.icon{height:44px}
+
+/* ---------- Rules ---------- */
+.mini-table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:var(--s-6)}
+.mini-table th,.mini-table td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--km-line)}
+.mini-table th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--km-ink-mute);font-weight:600}
+.mini-table td:last-child{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px}
+
+/* ---------- Dont ---------- */
+.dont{
+  background:var(--km-white);border:1px solid var(--km-line);border-radius:var(--r-lg);padding:var(--s-6);
+  display:flex;flex-direction:column;align-items:center;gap:var(--s-3);text-align:center;
+}
+.dont .box{position:relative;width:100%;height:120px;display:flex;align-items:center;justify-content:center}
+.dont .no{
+  position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:50%;
+  background:#FDECEF;color:#C33A57;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;
+}
+.dont p{font-size:13px;color:var(--km-ink-soft)}
+.dont .stretch img{transform:scaleX(1.55)}
+.dont .rotate img{transform:rotate(-24deg)}
+.dont .shadow img{filter:drop-shadow(0 6px 10px rgba(0,0,0,.45)) saturate(.4)}
+.dont .wrong-color img{filter:hue-rotate(150deg)}
+.dont .outline img{filter:drop-shadow(0 0 0 #333)}
+.dont .crowd img{width:34px}
+
+/* ---------- Mock ---------- */
+.mock{
+  background:linear-gradient(160deg,#FFFFFF,var(--km-mist));border:1px solid var(--km-line);
+  border-radius:var(--r-lg);padding:var(--s-6);box-shadow:var(--sh-sm);
+}
+.phone{
+  width:100%;max-width:200px;margin:0 auto;aspect-ratio:9/19;border-radius:26px;background:var(--km-white);
+  border:1px solid var(--km-line);box-shadow:var(--sh-md);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:14px;
+}
+.phone img{width:64px;height:64px;border-radius:14px}
+.phone span{font-family:var(--font-display);font-weight:700;font-size:15px;letter-spacing:-.02em}
+.card-mock{background:var(--km-white);border:1px solid var(--km-line);border-radius:var(--r-md);padding:var(--s-6);box-shadow:var(--sh-sm)}
+.card-mock .row{display:flex;align-items:center;gap:12px}
+.card-mock img{width:40px;height:40px}
+.card-mock .t{font-family:var(--font-display);font-weight:700;font-size:16px;letter-spacing:-.02em}
+.card-mock .d{font-size:13px;color:var(--km-ink-soft);margin-top:10px}
+.btn{
+  margin-top:var(--s-4);display:inline-flex;align-items:center;justify-content:center;height:44px;padding:0 22px;
+  border-radius:999px;background:var(--km-pink-500);color:#fff;font-weight:600;font-size:14px;border:none;cursor:pointer;
+  font-family:var(--font-body);transition:transform .2s ease,box-shadow .2s ease;
+}
+.btn:hover{transform:translateY(-1px);box-shadow:0 8px 18px -8px rgba(255,122,148,.7)}
+.btn:focus-visible{outline:2px solid var(--km-ink);outline-offset:3px}
+.sticker{
+  aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:var(--km-pink-100);border:2px dashed var(--km-pink-300);
+}
+.sticker img{width:56%}
+.fav{display:flex;align-items:flex-end;gap:18px;background:var(--km-white);border:1px solid var(--km-line);border-radius:var(--r-md);padding:var(--s-6)}
+
+/* ---------- Files ---------- */
+ul.files{list-style:none;margin-top:var(--s-6);font-size:13.5px}
+ul.files li{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid var(--km-line);flex-wrap:wrap}
+ul.files code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--km-pink-700);font-size:12.5px}
+ul.files span{color:var(--km-ink-soft)}
+
+footer{padding:var(--s-12) 0;text-align:center;color:var(--km-ink-mute);font-size:13px;border-top:1px solid var(--km-line)}
+
+@media(max-width:640px){
+  nav ul{display:none}
+  .wrap{padding:0 var(--s-4)}
+  section{padding:var(--s-12) 0}
+  .hero-card{padding:var(--s-12) var(--s-6)}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">
+      <img src="assets/icon-app.svg" alt="">
+      kids mind
+    </div>
+    <ul>
+      <li><a href="#concept">设计概念</a></li>
+      <li><a href="#mark">标识规范</a></li>
+      <li><a href="#color">色彩</a></li>
+      <li><a href="#type">字体</a></li>
+      <li><a href="#variant">变体</a></li>
+      <li><a href="#usage">应用</a></li>
+      <li><a href="#dont">禁用</a></li>
+      <li><a href="#a11y">无障碍</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-card">
+      <img class="hero-mark" src="assets/logo-a-sprout.svg" alt="kids mind 主标识">
+      <div class="hero-word">kids<em>mind</em></div>
+      <div class="hero-tag">母婴心智成长品牌 · 品牌标识系统 v1.0</div>
+      <div class="pill">主推方案 A · 心智萌芽 Sprout Mind</div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ 设计概念 ============ -->
+<section id="concept">
+  <div class="wrap">
+    <div class="eyebrow">01 / Design Concepts</div>
+    <h2>三个方向，一条主线</h2>
+    <p class="lead">母婴品类的视觉底线是<strong>安全感</strong>与<strong>柔软度</strong>：拒绝尖锐直角、拒绝高饱和刺激色、拒绝复杂具象插画。三个方案都建立在 4px 网格与圆角几何之上，区别只在于「品牌想先说哪一句话」。</p>
+
+    <div class="concepts">
+      <div class="concept reco">
+        <span class="tag hot">推荐 · 主标识</span>
+        <div class="stage">
+          <img src="assets/logo-a-sprout.svg" alt="">
+          <img class="sm" src="assets/logo-a-sprout-ink.svg" alt="">
+        </div>
+        <h3>A · 心智萌芽 Sprout Mind</h3>
+        <p>一枚温润的「卵形」轮廓代表母体包裹与生命孕育；内部以<strong>负形镂空</strong>长出双叶新芽，寓意 kids 的心智在安全环境中生长。图形只有「一个外形 + 一个负形」，16px 仍可辨识，是唯一能同时满足图标、Appicon、包装压印的方案。</p>
+      </div>
+
+      <div class="concept">
+        <span class="tag">备选</span>
+        <div class="stage">
+          <img src="assets/logo-b-twin.svg" alt="">
+          <img class="sm" src="assets/logo-b-twin.svg" alt="">
+        </div>
+        <h3>B · 双心智 Twin Minds</h3>
+        <p>大圆（parent）与小圆（child）交叠，白环分离两层，直接讲述「两颗心同频」。叙事最直白、亲和力最强，适合社群与内容型产品；缺点是双色结构在小尺寸下会糊成一团，需额外做单色简化版。</p>
+      </div>
+
+      <div class="concept">
+        <span class="tag">App 图标专用</span>
+        <div class="stage">
+          <img src="assets/logo-c-monogram.svg" alt="">
+          <img class="sm" src="assets/icon-app.svg" alt="">
+        </div>
+        <h3>C · K 字圆章 Monogram</h3>
+        <p>把首字母 K 做成圆头笔画，右上斜线末端收为一颗圆点（孩子的头），装入圆角方章。识别效率最高、最适合做头像与货架位；但图形语义弱于 A，建议只作为<strong>头像位与 App 图标</strong>的补充，不与 A 混用。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 标识规范 ============ -->
+<section id="mark">
+  <div class="wrap">
+    <div class="eyebrow">02 / Logo Construction</div>
+    <h2>标识构造 · 安全区 · 最小尺寸</h2>
+    <p class="lead">主标识建立在 64 × 64 单位网格上，所有圆角与笔画均为 4 的倍数。负形芽体居中偏移 0，保证旋转对称的视觉稳定。</p>
+
+    <div class="grid-2">
+      <div class="panel">
+        <h3>构造网格</h3>
+        <svg viewBox="0 0 320 200" style="width:100%;height:auto">
+          <defs>
+            <linearGradient id="gConst" x1="80" y1="30" x2="240" y2="170" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#FF7A94"/><stop offset="1" stop-color="#FFB877"/>
+            </linearGradient>
+            <mask id="mConst">
+              <rect width="320" height="200" fill="#fff"/>
+              <g fill="#000">
+                <path d="M157 118C129 116 108 96 113 66C140 64 157 90 157 118Z"/>
+                <path d="M163 100C191 98 212 78 207 48C180 46 163 72 163 100Z"/>
+                <path d="M160 148V82" stroke="#000" stroke-width="17" stroke-linecap="round"/>
+              </g>
+            </mask>
+          </defs>
+          <g stroke="#EAE4EE" stroke-width="1">
+            <path d="M0 25H320M0 50H320M0 75H320M0 100H320M0 125H320M0 150H320M0 175H320"/>
+            <path d="M25 0V200M50 0V200M75 0V200M100 0V200M125 0V200M150 0V200M175 0V200M200 0V200M225 0V200M250 0V200M275 0V200M300 0V200"/>
+          </g>
+          <g transform="translate(80 20) scale(2.5)">
+            <path mask="url(#mConst)" fill="url(#gConst)" d="M32 5C40.6 5 47 15.4 47 28C47 43 40.6 58 32 58C23.4 58 17 43 17 28C17 15.4 23.4 5 32 5Z"/>
+          </g>
+          <g stroke="#FF7A94" stroke-width="1.5" stroke-dasharray="5 4" fill="none">
+            <rect x="80" y="20" width="160" height="160"/>
+          </g>
+          <circle cx="160" cy="100" r="6" fill="none" stroke="#FF7A94" stroke-width="1.5"/>
+          <path d="M160 100H240" stroke="#FF7A94" stroke-width="1.5"/>
+          <text x="244" y="104" font-family="ui-monospace,Menlo,monospace" font-size="12" fill="#CE3F63">W = 64u</text>
+        </svg>
+        <p style="margin-top:16px">外形 = 卵形（孕育 / 包裹）；芽体 = 负形镂空（心智生长）。二者共用同一条视觉中轴。</p>
+      </div>
+
+      <div class="panel">
+        <h3>安全区 Clear Space</h3>
+        <svg viewBox="0 0 320 200" style="width:100%;height:auto">
+          <rect x="60" y="20" width="200" height="160" fill="#FFE8ED"/>
+          <rect x="85" y="45" width="150" height="110" fill="none" stroke="#FF7A94" stroke-width="1.5" stroke-dasharray="5 4"/>
+          <g transform="translate(125 60) scale(1.7)">
+            <svg width="64" height="64" viewBox="0 0 64 64" overflow="visible">
+              <defs>
+                <mask id="mClear">
+                  <rect width="64" height="64" fill="#fff"/>
+                  <g fill="#000">
+                    <path d="M31.4 36.5C25.6 36 21 31.2 22 24.4C27.7 23.9 31.4 29.6 31.4 36.5Z"/>
+                    <path d="M32.6 32.6C38.4 32.1 42 27.3 41 20.5C35.3 20 32.6 25.7 32.6 32.6Z"/>
+                    <path d="M32 46V27" stroke="#000" stroke-width="4.6" stroke-linecap="round"/>
+                  </g>
+                </mask>
+              </defs>
+              <path mask="url(#mClear)" fill="#FF7A94" d="M32 5C40.6 5 47 15.4 47 28C47 43 40.6 58 32 58C23.4 58 17 43 17 28C17 15.4 23.4 5 32 5Z"/>
+            </svg>
+          </g>
+          <text x="160" y="182" text-anchor="middle" font-family="ui-monospace,Menlo,monospace" font-size="12" fill="#CE3F63">clear space = 1/4 W</text>
+        </svg>
+        <p style="margin-top:16px">标识四周必须保留不小于标识宽度 <strong>1/4</strong> 的留白，任何文字、图形、裁切线不得进入。</p>
+      </div>
+    </div>
+
+    <table class="mini-table">
+      <thead><tr><th>使用场景</th><th>形态</th><th>最小尺寸</th></tr></thead>
+      <tbody>
+        <tr><td>App 图标 / 桌面图标</td><td>圆角方章 + 白色负形</td><td>44 × 44 px</td></tr>
+        <tr><td>favicon / 浏览器标签</td><td>简化版 icon-mini</td><td>16 × 16 px</td></tr>
+        <tr><td>导航栏图标</td><td>单色 currentColor</td><td>24 × 24 px</td></tr>
+        <tr><td>横版锁定（带字标）</td><td>mark + kids mind</td><td>高 24 px（整体宽 ≥ 96 px）</td></tr>
+        <tr><td>竖版锁定（带字标）</td><td>mark 上 / 字标下</td><td>宽 64 px</td></tr>
+        <tr><td>包装印刷 / 织唛</td><td>单色专色版</td><td>宽 12 mm</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 色彩 ============ -->
+<section id="color">
+  <div class="wrap">
+    <div class="eyebrow">03 / Color System</div>
+    <h2>色彩系统</h2>
+    <p class="lead">母婴品类避免使用正红与荧光色。主色取「肌肤暖粉 → 暖阳杏」的渐变，传递体温与拥抱；薄荷绿作为成长/安心辅助色仅用于点缀与状态反馈，不承载大面积正文。</p>
+
+    <div class="grid-4">
+      <div class="swatch"><div class="chip" style="background:#FF7A94"></div><div class="sw-body"><strong>Mind Pink 500</strong><code>#FF7A94</code><div class="meta">品牌主色 · 图形</div><span class="badge warn">仅图形 / 大字号</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#EC4C6B"></div><div class="sw-body"><strong>Mind Pink 600</strong><code>#EC4C6B</code><div class="meta">字标 / 标题强调</div><span class="badge pass">3.6:1 · AA Large</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#CE3F63"></div><div class="sw-body"><strong>Mind Pink 700</strong><code>#CE3F63</code><div class="meta">正文链接 / 可点击</div><span class="badge pass">4.6:1 · AA</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#FFB877"></div><div class="sw-body"><strong>Sun Apricot 500</strong><code>#FFB877</code><div class="meta">渐变收尾 / 暖调</div><span class="badge warn">装饰用</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#42CEB3"></div><div class="sw-body"><strong>Sprout Mint 500</strong><code>#42CEB3</code><div class="meta">成长 / 成功状态</div><span class="badge warn">仅图形</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#12806C"></div><div class="sw-body"><strong>Sprout Mint 700</strong><code>#12806C</code><div class="meta">薄荷系文字</div><span class="badge pass">4.85:1 · AA</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#2E2A3B"></div><div class="sw-body"><strong>Soft Ink</strong><code>#2E2A3B</code><div class="meta">主文字 / 单色标识</div><span class="badge pass">12.9:1 · AAA</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#F7F4F8;border-bottom:1px solid #EAE4EE"></div><div class="sw-body"><strong>Mist</strong><code>#F7F4F8</code><div class="meta">页面底色</div><span class="badge pass">—</span></div></div>
+    </div>
+
+    <div class="panel" style="margin-top:32px">
+      <h3>主标识渐变</h3>
+      <div style="height:64px;border-radius:14px;background:linear-gradient(135deg,#FF7A94 0%,#FFB877 100%)"></div>
+      <p style="margin-top:12px">角度 135°，起点 <code>#FF7A94</code> → 终点 <code>#FFB877</code>。禁止改成三段以上渐变、禁止叠加噪点或高光。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 字体 ============ -->
+<section id="type">
+  <div class="wrap">
+    <div class="eyebrow">04 / Typography</div>
+    <h2>字体</h2>
+    <p class="lead">字标全部小写 —— 小写字母圆润、无锐利竖线，天然降低压迫感，符合母婴语境。</p>
+    <div class="grid-2">
+      <div class="panel">
+        <h3>字标 Lockup</h3>
+        <div class="specimen">kids<em>mind</em></div>
+        <p style="margin-top:14px">Quicksand 700，字距 −0.035em。<em>kids</em> 用 Soft Ink，<em>mind</em> 用 Pink 600 —— 语义重心落在「mind」上。</p>
+      </div>
+      <div class="panel">
+        <h3>字阶</h3>
+        <div class="type-row"><span style="font-family:var(--font-display);font-size:30px;font-weight:700">Display 30</span><span class="spec">700 / −0.03em</span></div>
+        <div class="type-row"><span style="font-family:var(--font-display);font-size:22px;font-weight:700">Title 22</span><span class="spec">700 / −0.02em</span></div>
+        <div class="type-row"><span style="font-size:17px;font-weight:600">Body 17</span><span class="spec">600 / 1.6</span></div>
+        <div class="type-row"><span style="font-size:14px;color:var(--km-ink-soft)">Caption 14</span><span class="spec">400 / 1.5</span></div>
+        <p style="margin-top:14px">西文 Quicksand / Inter；中文 PingFang SC、HarmonyOS Sans SC。字重只用 500 / 600 / 700 三档。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 变体 ============ -->
+<section id="variant">
+  <div class="wrap">
+    <div class="eyebrow">05 / Variants</div>
+    <h2>标识变体</h2>
+    <p class="lead">导出时优先使用 SVG。位图按 @1x / @2x / @3x 输出 PNG，透明底。</p>
+    <div class="grid-4">
+      <div class="variant"><img src="assets/logo-a-sprout.svg" alt=""><span class="cap">主标识 · 渐变<br>浅底首选</span></div>
+      <div class="variant"><img src="assets/logo-a-sprout-ink.svg" alt=""><span class="cap">单色 · Soft Ink<br>印刷 / 单据</span></div>
+      <div class="variant dark"><img src="assets/logo-a-sprout-white.svg" alt=""><span class="cap">反白版<br>深底 / 图片上</span></div>
+      <div class="variant"><img src="assets/logo-a-sprout-pink.svg" alt=""><span class="cap">单色 · 品牌粉<br>单色印刷</span></div>
+      <div class="variant"><img src="assets/lockup-horizontal.svg" style="height:44px" alt=""><span class="cap">横版锁定<br>页头 / 名片</span></div>
+      <div class="variant"><img src="assets/lockup-vertical.svg" style="height:88px" alt=""><span class="cap">竖版锁定<br>包装 / 中心位</span></div>
+      <div class="variant"><img class="icon" src="assets/icon-app.svg" alt=""><span class="cap">App 图标<br>圆角 15/64 ≈ 23%</span></div>
+      <div class="variant" style="color:#2E2A3B"><img class="icon" src="assets/icon-mini-ink.svg" alt=""><span class="cap">极简版<br>≤ 20px 场景</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 应用 ============ -->
+<section id="usage">
+  <div class="wrap">
+    <div class="eyebrow">06 / Application</div>
+    <h2>应用场景</h2>
+    <div class="grid-3">
+      <div class="mock">
+        <div class="phone"><img src="assets/icon-app.svg" alt=""><span>kids mind</span></div>
+        <p style="text-align:center;font-size:13px;color:var(--km-ink-soft);margin-top:14px">启动图标 · 1024px 导出</p>
+      </div>
+      <div class="mock card-mock">
+        <div class="row"><img src="assets/logo-a-sprout.svg" alt=""><div><div class="t">kids mind</div><div style="font-size:12px;color:var(--km-ink-mute)">0–3 岁心智成长陪伴</div></div></div>
+        <div class="d">每一天的小小好奇，都在长成未来的样子。</div>
+        <button class="btn">了解更多</button>
+      </div>
+      <div class="mock">
+        <div class="sticker"><img src="assets/logo-a-sprout.svg" alt=""></div>
+        <p style="text-align:center;font-size:13px;color:var(--km-ink-soft);margin-top:14px">封口贴 / 织唛 · 单色压印</p>
+      </div>
+    </div>
+    <div class="panel" style="margin-top:24px">
+      <h3>favicon 尺寸链</h3>
+      <div class="fav">
+        <div style="text-align:center"><img src="assets/icon-mini-ink.svg" style="width:16px" alt=""><div class="cap" style="font-size:11px;color:var(--km-ink-mute);margin-top:8px">16px</div></div>
+        <div style="text-align:center"><img src="assets/icon-mini-ink.svg" style="width:28px" alt=""><div class="cap" style="font-size:11px;color:var(--km-ink-mute);margin-top:8px">28px</div></div>
+        <div style="text-align:center"><img src="assets/icon-app.svg" style="width:48px;border-radius:11px" alt=""><div class="cap" style="font-size:11px;color:var(--km-ink-mute);margin-top:8px">48px</div></div>
+        <div style="text-align:center"><img src="assets/icon-app.svg" style="width:76px;border-radius:17px" alt=""><div class="cap" style="font-size:11px;color:var(--km-ink-mute);margin-top:8px">76px</div></div>
+      </div>
+      <p style="margin-top:14px">≤ 28px 一律使用 <code>icon-mini.svg</code>：芽体简化为三根圆头笔画，避免镂空细节在像素网格上糊掉。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 禁用 ============ -->
+<section id="dont">
+  <div class="wrap">
+    <div class="eyebrow">07 / Misuse</div>
+    <h2>禁止用法</h2>
+    <p class="lead">标识是品牌资产，不是可编辑素材。以下操作一律不允许。</p>
+    <div class="grid-3">
+      <div class="dont"><div class="box stretch"><span class="no">✕</span><img src="assets/logo-a-sprout.svg" style="width:64px" alt=""></div><p>拉伸 / 变形 · 必须等比缩放</p></div>
+      <div class="dont"><div class="box rotate"><span class="no">✕</span><img src="assets/logo-a-sprout.svg" style="width:64px" alt=""></div><p>旋转 / 倾斜</p></div>
+      <div class="dont"><div class="box wrong-color"><span class="no">✕</span><img src="assets/logo-a-sprout.svg" style="width:64px" alt=""></div><p>擅自改色 · 只用规范内配色</p></div>
+      <div class="dont"><div class="box shadow"><span class="no">✕</span><img src="assets/logo-a-sprout.svg" style="width:64px" alt=""></div><p>加深投影 / 描边 / 发光</p></div>
+      <div class="dont"><div class="box"><span class="no">✕</span><img src="assets/logo-a-sprout.svg" style="width:64px;opacity:.35" alt=""></div><p>降低不透明度置于复杂背景</p></div>
+      <div class="dont"><div class="box crowd"><span class="no">✕</span><img src="assets/logo-a-sprout.svg" alt=""></div><p>小于最小尺寸使用</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 无障碍 ============ -->
+<section id="a11y">
+  <div class="wrap">
+    <div class="eyebrow">08 / Accessibility</div>
+    <h2>无障碍与交付</h2>
+    <div class="grid-2">
+      <div class="panel">
+        <h3>WCAG AA 校验</h3>
+        <table class="mini-table" style="margin-top:0">
+          <thead><tr><th>组合</th><th>对比度</th><th>结论</th></tr></thead>
+          <tbody>
+            <tr><td>Soft Ink #2E2A3B / 白</td><td>12.9 : 1</td><td>AAA 正文可用</td></tr>
+            <tr><td>Pink 700 #CE3F63 / 白</td><td>4.6 : 1</td><td>AA 正文可用</td></tr>
+            <tr><td>Pink 600 #EC4C6B / 白</td><td>3.6 : 1</td><td>AA 仅 ≥24px 大字</td></tr>
+            <tr><td>Mint 700 #12806C / 白</td><td>4.85 : 1</td><td>AA 正文可用</td></tr>
+            <tr><td>Pink 500 #FF7A94 / 白</td><td>2.5 : 1</td><td>仅图形，禁用于文字</td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top:14px">单色标识在深底使用反白版、浅底使用 Soft Ink 版，保证标识本身 ≥ 3:1。所有可点击的标识需具备 <code>focus-visible</code> 焦点环。</p>
+      </div>
+      <div class="panel">
+        <h3>SVG 使用要点</h3>
+        <p style="margin-bottom:12px">作为图标使用时补齐可访问属性：</p>
+        <pre style="background:var(--km-mist);border:1px solid var(--km-line);border-radius:10px;padding:14px;font-size:12px;overflow:auto;line-height:1.7"><code>&lt;svg role="img" aria-label="kids mind"
+     focusable="false"&gt; … &lt;/svg&gt;
+
+/* 装饰性出现时 */
+&lt;svg aria-hidden="true" focusable="false"&gt;</code></pre>
+        <p style="margin-top:14px">单色版使用 <code>fill="currentColor"</code>，颜色由外层 CSS 控制，深浅色主题自动适配。</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:40px">交付文件</h3>
+    <ul class="files">
+      <li><code>assets/logo-a-sprout.svg</code><span>主标识 · 渐变版（推荐）</span></li>
+      <li><code>assets/logo-a-sprout-mono.svg</code><span>主标识 · 单色 currentColor 版</span></li>
+      <li><code>assets/logo-b-twin.svg</code><span>备选方案 B · 双心智</span></li>
+      <li><code>assets/logo-c-monogram.svg</code><span>备选方案 C · K 字圆章</span></li>
+      <li><code>assets/icon-app.svg</code><span>App 图标 · 圆角方章</span></li>
+      <li><code>assets/icon-mini.svg</code><span>极简版 · ≤28px 场景</span></li>
+      <li><code>assets/lockup-horizontal.svg</code><span>横版锁定（标识 + 字标）</span></li>
+      <li><code>assets/lockup-vertical.svg</code><span>竖版锁定（标识 + 字标）</span></li>
+      <li><code>index.html</code><span>本规范页</span></li>
+    </ul>
+    <p style="margin-top:20px;font-size:13.5px;color:var(--km-ink-soft)">上线前建议补出：PNG @1x/2x/3x 透明底、1024px App Store 图标（不留透明通道）、单色 EPS 印刷版。</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    kids mind · 品牌标识系统 v1.0 &nbsp;|&nbsp; UI Designer &nbsp;|&nbsp; 规范随产品迭代更新
+  </div>
+</footer>
+
+</body>
+</html>

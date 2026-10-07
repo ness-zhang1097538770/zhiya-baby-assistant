@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design Tokens · Kids Mind</title>
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="index.html" class="brand"><img src="../kids-mind-brand/assets/logo-a-sprout.svg" alt=""> kids mind</a>
+    <ul>
+      <li><a href="index.html">总览</a></li>
+      <li><a href="tokens.html">Token</a></li>
+      <li><a href="icons.html">图标</a></li>
+      <li><a href="components.html">组件</a></li>
+      <li><a href="pages.html">页面</a></li>
+      <li><a href="illustrations.html">插画</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section style="padding-top:var(--space-12)">
+  <div class="wrap">
+    <div class="eyebrow">02 / Color System</div>
+    <h2>色彩系统</h2>
+    <p class="lead">在现有暖米+深绿+橙陶土基调上刷新：用「陶土橙」承载主按钮与关键强调，「鼠尾草绿」表达成长与安全，「奶油/天蓝」作轻量辅助。品牌渐变仅用于 Logo、Hero 与品牌情感卡片。</p>
+
+    <h3 style="margin-top:var(--space-10)">主色 Primary</h3>
+    <div class="grid-5" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:var(--space-4);margin-top:var(--space-5)">
+      <div class="swatch"><div class="chip" style="background:var(--km-primary-50)"></div><div class="body"><strong>primary-50</strong><code>#FDF3EE</code><div class="meta">浅背景 / hover</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--km-primary-100)"></div><div class="body"><strong>primary-100</strong><code>#F7D7C9</code><div class="meta">标签底色</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--km-primary-300)"></div><div class="body"><strong>primary-300</strong><code>#EC9E7F</code><div class="meta">弱强调</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--km-primary-500)"></div><div class="body"><strong>primary-500</strong><code>#D86B4C</code><span class="badge pass">主按钮</span></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--km-primary-700)"></div><div class="body"><strong>primary-700</strong><code>#A84A2E</code><div class="meta">按下 / 链接 hover</div></div></div>
+    </div>
+
+    <h3 style="margin-top:var(--space-10)">辅助色 Secondary</h3>
+    <div class="grid-4">
+      <div class="swatch"><div class="chip" style="background:var(--km-sage-500)"></div><div class="body"><strong>Sage 500</strong><code>#7AA895</code><div class="meta">成长 / 成功 / 自然</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--km-sage-100)"></div><div class="body"><strong>Sage 100</strong><code>#DCE9E2</code><div class="meta">柔和底纹</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--km-cream-100)"></div><div class="body"><strong>Cream 100</strong><code>#F7E8C6</code><div class="meta">提示 / 高亮</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--km-sky-500)"></div><div class="body"><strong>Sky 500</strong><code>#6CA3BE</code><div class="meta">信息 / 链接</div></div></div>
+    </div>
+
+    <h3 style="margin-top:var(--space-10)">中性色 Neutral</h3>
+    <div class="grid-4">
+      <div class="swatch"><div class="chip" style="background:var(--km-ink)"></div><div class="body"><strong>Ink</strong><code>#2A3633</code><span class="badge pass">主文字</span></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--km-ink-secondary)"></div><div class="body"><strong>Ink Secondary</strong><code>#5E716C</code><div class="meta">次要文字</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--km-ink-muted)"></div><div class="body"><strong>Ink Muted</strong><code>#8B9894</code><div class="meta">辅助 / 禁用</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--km-bg);border-bottom:1px solid var(--km-line)"></div><div class="body"><strong>Background</strong><code>#F5F2EC</code><div class="meta">页面底色</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--km-surface);border-bottom:1px solid var(--km-line)"></div><div class="body"><strong>Surface</strong><code>#FFFDF8</code><div class="meta">卡片</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--km-surface-elevated);border-bottom:1px solid var(--km-line)"></div><div class="body"><strong>Surface Elevated</strong><code>#FFFFFF</code><div class="meta">浮层 / 弹窗</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--km-line)"></div><div class="body"><strong>Line</strong><code>#E8E4DC</code><div class="meta">分隔线 / 边框</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--km-line-strong)"></div><div class="body"><strong>Line Strong</strong><code>#D9D3C8</code><div class="meta">强分隔</div></div></div>
+    </div>
+
+    <h3 style="margin-top:var(--space-10)">语义色 Semantic</h3>
+    <div class="grid-4">
+      <div class="swatch"><div class="chip" style="background:var(--km-success-500)"></div><div class="body"><strong>Success 500</strong><code>#3C8D6F</code><span class="badge pass">成功</span></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--km-warning-500)"></div><div class="body"><strong>Warning 500</strong><code>#C98A1F</code><span class="badge warn">警告</span></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--km-danger-500)"></div><div class="body"><strong>Danger 500</strong><code>#B84D43</code><div class="meta">危险 / 删除</div></div></div>
+      <div class="swatch"><div class="chip" style="background:var(--km-info-500)"></div><div class="body"><strong>Info 500</strong><code>#4A85A8</code><div class="meta">信息提示</div></div></div>
+    </div>
+
+    <h3 style="margin-top:var(--space-10)">医疗风险分级 Medical Risk（色盲友好）</h3>
+    <p class="lead">医疗风险卡片必须同时使用<strong>颜色 + 图标 + 底纹/边框</strong>三重线索，不能仅靠颜色区分。</p>
+    <div class="grid-3">
+      <div class="panel" style="border-left:6px solid var(--km-risk-high-500)">
+        <h4>高危 · 需就医</h4>
+        <p><strong>色值：</strong><code>#A8324B</code> / 底纹 <code>#F8E6EA</code></p>
+        <p><strong>图标：</strong>三角感叹 <code>triangle-alert</code></p>
+        <p style="font-size:var(--text-small);color:var(--km-ink-secondary);margin-top:var(--space-3)">卡片左侧 6px 色条 + 图标 + 粗体标题 + 就医按钮。</p>
+      </div>
+      <div class="panel" style="border-left:6px solid var(--km-risk-medium-500)">
+        <h4>中危 · 需观察</h4>
+        <p><strong>色值：</strong><code>#B87A1E</code> / 底纹 <code>#F8EFDB</code></p>
+        <p><strong>图标：</strong>眼睛 <code>eye</code></p>
+        <p style="font-size:var(--text-small);color:var(--km-ink-secondary);margin-top:var(--space-3)">黄色琥珀色条 + 观察清单 + 触发条件说明。</p>
+      </div>
+      <div class="panel" style="border-left:6px solid var(--km-risk-low-500)">
+        <h4>常规 · 安全</h4>
+        <p><strong>色值：</strong><code>#3C8D6F</code> / 底纹 <code>#E9F5EF</code></p>
+        <p><strong>图标：</strong>勾选圆 <code>check-circle</code></p>
+        <p style="font-size:var(--text-small);color:var(--km-ink-secondary);margin-top:var(--space-3)">绿色色条 + 对勾图标 + 温和回答正文。</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:var(--space-10)">品牌渐变与使用禁区</h3>
+    <div class="panel" style="display:flex;gap:var(--space-6);align-items:center;flex-wrap:wrap">
+      <div style="width:160px;height:160px;border-radius:var(--radius-xl);background:var(--km-brand-gradient)"></div>
+      <div style="flex:1;min-width:260px">
+        <p><strong>品牌渐变：</strong><code>linear-gradient(135deg, #FF7A94 0%, #FFB877 100%)</code></p>
+        <ul style="margin-top:var(--space-3);padding-left:var(--space-6);color:var(--km-ink-secondary);font-size:var(--text-small)">
+          <li>仅用于 Logo、启动页、品牌 Hero、会员/情感卡片。</li>
+          <li>禁止用于按钮、表单、医疗风险、语义状态。</li>
+          <li>禁止更改为三段以上渐变或叠加纹理。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">03 / Typography</div>
+    <h2>字体系统</h2>
+    <p class="lead">中文放弃宋体，改用思源黑体/阿里巴巴普惠体作为标题与正文，避免 Windows 上降级为 SimSun 的问题。英文与数字使用 Inter，数值区域开启等宽数字。</p>
+
+    <div class="grid-2">
+      <div class="panel">
+        <h3>字体族</h3>
+        <table class="mini">
+          <tr><th>用途</th><th>字体栈</th><th>授权</th></tr>
+          <tr><td>品牌字标 / 英文 Display</td><td><code>Quicksand</code></td><td>OFL</td></tr>
+          <tr><td>中文标题 + 正文</td><td><code>Source Han Sans SC</code></td><td>OFL</td></tr>
+          <tr><td>中文兜底</td><td><code>Alibaba PuHuiTi 2.0 / PingFang SC / Microsoft YaHei</code></td><td>免费商用 / 系统字体</td></tr>
+          <tr><td>英文 / 数字正文</td><td><code>Inter</code></td><td>OFL</td></tr>
+        </table>
+      </div>
+      <div class="panel">
+        <h3>字阶与响应式</h3>
+        <table class="mini">
+          <tr><th>层级</th><th>字号</th><th>字重</th><th>行高</th></tr>
+          <tr><td>Display</td><td><code>clamp(36,4vw,44)</code></td><td>700</td><td>1.2</td></tr>
+          <tr><td>H1</td><td><code>clamp(26,2.5vw,30)</code></td><td>700</td><td>1.25</td></tr>
+          <tr><td>H2</td><td><code>clamp(20,1.6vw,24)</code></td><td>600</td><td>1.3</td></tr>
+          <tr><td>H3</td><td>18px</td><td>600</td><td>1.35</td></tr>
+          <tr><td>Body</td><td>16px</td><td>400</td><td>1.7</td></tr>
+          <tr><td>Small</td><td>14px</td><td>400</td><td>1.6</td></tr>
+          <tr><td>Caption</td><td>12px</td><td>400</td><td>1.5</td></tr>
+          <tr><td>Eyebrow</td><td>11px</td><td>700</td><td>1.4</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:var(--space-8)">
+      <h3>长文阅读版式</h3>
+      <p>AI 回答正文容器最大宽度 <code>680px</code>，对应中文约 40–55 字/行；行高 1.7，段间距 0.75em，段首不缩进。</p>
+      <div style="max-width:680px;margin-top:var(--space-5);padding:var(--space-6);background:var(--km-surface);border-radius:var(--radius-lg);border:1px solid var(--km-line)">
+        <p style="font-size:var(--text-body);line-height:1.7;color:var(--km-ink)">宝宝 6 个月左右出现睡眠倒退是常见现象，通常与大脑发育、出牙或分离焦虑有关。你可以保持固定的睡前程序，白天增加适量活动，避免过度疲劳。如果伴随发热、持续哭闹或食欲明显下降，建议及时就医。</p>
+        <p style="margin-top:0.75em;font-size:var(--text-body);line-height:1.7;color:var(--km-ink)">这里提供一个简单的睡前程序参考：洗澡 → 抚触 → 喂奶 → 读绘本 → 关灯。每个环节控制在 10 分钟以内，帮助宝宝建立睡眠联想。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">04 / Space & Radius</div>
+    <h2>间距、圆角与阴影</h2>
+
+    <h3 style="margin-top:var(--space-6)">间距 Scale（8pt 基准）</h3>
+    <div style="display:flex;flex-wrap:wrap;gap:var(--space-3);margin-top:var(--space-4)">
+      <div style="width:24px;height:24px;background:var(--km-primary-300);border-radius:4px" title="space-2 = 8px"></div>
+      <div style="width:32px;height:32px;background:var(--km-primary-300);border-radius:4px" title="space-3 = 12px"></div>
+      <div style="width:48px;height:48px;background:var(--km-primary-300);border-radius:4px" title="space-4 = 16px"></div>
+      <div style="width:64px;height:64px;background:var(--km-primary-300);border-radius:4px" title="space-6 = 24px"></div>
+      <div style="width:96px;height:96px;background:var(--km-primary-300);border-radius:4px" title="space-8 = 32px"></div>
+    </div>
+    <p class="lead">推荐卡片内边距 16–24px；卡片之间 16–24px；区块之间 32–48px。移动端统一降一档。</p>
+
+    <h3 style="margin-top:var(--space-10)">圆角与阴影</h3>
+    <div class="grid-4">
+      <div class="panel" style="text-align:center"><div style="width:80px;height:80px;background:var(--km-surface);border:1px solid var(--km-line);border-radius:var(--radius-sm);margin:0 auto"></div><p style="margin-top:var(--space-3);font-size:var(--text-small)">sm 8px · 小标签 / 输入框</p></div>
+      <div class="panel" style="text-align:center"><div style="width:80px;height:80px;background:var(--km-surface);border:1px solid var(--km-line);border-radius:var(--radius-md);margin:0 auto"></div><p style="margin-top:var(--space-3);font-size:var(--text-small)">md 12px · 按钮 / 小卡片</p></div>
+      <div class="panel" style="text-align:center"><div style="width:80px;height:80px;background:var(--km-surface);border:1px solid var(--km-line);border-radius:var(--radius-lg);margin:0 auto"></div><p style="margin-top:var(--space-3);font-size:var(--text-small)">lg 16px · 卡片 / 弹窗</p></div>
+      <div class="panel" style="text-align:center"><div style="width:80px;height:80px;background:var(--km-surface);border:1px solid var(--km-line);border-radius:var(--radius-xl);margin:0 auto"></div><p style="margin-top:var(--space-3);font-size:var(--text-small)">xl 24px · 品牌卡片 / Hero</p></div>
+    </div>
+
+    <div class="grid-4" style="margin-top:var(--space-6)">
+      <div class="panel" style="text-align:center"><div style="width:80px;height:80px;background:#fff;border-radius:var(--radius-lg);box-shadow:var(--shadow-xs);margin:0 auto"></div><p style="margin-top:var(--space-3);font-size:var(--text-small)">xs</p></div>
+      <div class="panel" style="text-align:center"><div style="width:80px;height:80px;background:#fff;border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);margin:0 auto"></div><p style="margin-top:var(--space-3);font-size:var(--text-small)">sm</p></div>
+      <div class="panel" style="text-align:center"><div style="width:80px;height:80px;background:#fff;border-radius:var(--radius-lg);box-shadow:var(--shadow-md);margin:0 auto"></div><p style="margin-top:var(--space-3);font-size:var(--text-small)">md</p></div>
+      <div class="panel" style="text-align:center"><div style="width:80px;height:80px;background:#fff;border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);margin:0 auto"></div><p style="margin-top:var(--space-3);font-size:var(--text-small)">lg</p></div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">Kids Mind Design System · Tokens v1.0</div></footer>
+</body>
+</html>

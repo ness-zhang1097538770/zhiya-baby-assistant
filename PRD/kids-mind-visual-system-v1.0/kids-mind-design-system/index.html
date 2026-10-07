@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kids Mind · Design System v1.0</title>
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+.hero{background:linear-gradient(135deg,#FF7A94 0%,#FFB877 100%);border-radius:var(--radius-xl);padding:var(--space-10);color:#fff;text-align:center;margin-top:var(--space-8);box-shadow:var(--shadow-lg)}
+.hero h1{font-size:var(--text-display);font-weight:700;letter-spacing:-0.02em}
+.hero p{opacity:.92;margin-top:var(--space-3)}
+
+.nav-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:var(--space-5);margin-top:var(--space-8)}
+.nav-card{background:var(--km-surface);border:1px solid var(--km-line);border-radius:var(--radius-xl);padding:var(--space-6);text-decoration:none;color:var(--km-ink);transition:transform .2s ease,box-shadow .2s ease}
+.nav-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.nav-card .num{font-family:var(--font-display);font-size:28px;font-weight:700;color:var(--km-primary-500)}
+.nav-card h3{margin:var(--space-2) 0}
+.nav-card p{font-size:var(--text-small);color:var(--km-ink-secondary)}
+
+.status{display:inline-block;font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px}
+.status-p0{background:var(--km-danger-100);color:var(--km-danger-700)}
+.status-p1{background:var(--km-warning-100);color:var(--km-warning-700)}
+
+.timeline-table{width:100%;border-collapse:collapse;font-size:var(--text-small);margin-top:var(--space-6)}
+.timeline-table th,.timeline-table td{text-align:left;padding:var(--space-3) var(--space-4);border-bottom:1px solid var(--km-line)}
+.timeline-table th{color:var(--km-ink-muted);font-size:var(--text-eyebrow);text-transform:uppercase;letter-spacing:.06em}
+
+.motion-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:var(--space-5);margin-top:var(--space-6)}
+.demo-box{width:80px;height:80px;background:var(--km-primary-500);border-radius:var(--radius-lg);margin:var(--space-4) auto}
+.demo-hover:hover .demo-box{transform:translateY(-6px);box-shadow:var(--shadow-md)}
+.demo-press:active .demo-box{transform:scale(.95)}
+.demo-fade{animation:fadeIn 1s ease-in-out infinite alternate}
+@keyframes fadeIn{from{opacity:.3}to{opacity:1}}
+.demo-shimmer{background:linear-gradient(90deg,var(--km-line) 25%,var(--km-surface) 50%,var(--km-line) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+.access-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:var(--space-5);margin-top:var(--space-6)}
+.access-item{background:var(--km-surface);border:1px solid var(--km-line);border-radius:var(--radius-lg);padding:var(--space-5)}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a href="index.html" class="brand"><img src="../kids-mind-brand/assets/logo-a-sprout.svg" alt=""> kids mind</a>
+    <ul>
+      <li><a href="index.html">总览</a></li>
+      <li><a href="tokens.html">Token</a></li>
+      <li><a href="icons.html">图标</a></li>
+      <li><a href="components.html">组件</a></li>
+      <li><a href="pages.html">页面</a></li>
+      <li><a href="illustrations.html">插画</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section style="padding-top:var(--space-12)">
+  <div class="wrap">
+    <div class="hero">
+      <h1>Kids Mind 视觉系统 v1.0</h1>
+      <p>面向 0–6 岁儿童家长的科学育儿助手 · 品牌标识已确认「心智萌芽」方案</p>
+      <div style="margin-top:var(--space-5)"><span style="display:inline-block;background:rgba(255,255,255,.2);padding:6px 16px;border-radius:var(--radius-pill);font-size:var(--text-small)">陪你读懂成长</span></div>
+    </div>
+
+    <div class="nav-cards">
+      <a href="tokens.html" class="nav-card"><div class="num">01</div><h3>Tokens</h3><p>色彩、字体、间距、圆角、阴影、医疗风险分级色。</p></a>
+      <a href="icons.html" class="nav-card"><div class="num">02</div><h3>Icons</h3><p>约 50 枚 24px 线性圆角图标，含 SVG Sprite 与使用清单。</p></a>
+      <a href="components.html" class="nav-card"><div class="num">03</div><h3>Components</h3><p>按钮、输入、卡片、标签、弹窗、AI 回答、风险卡片、时间线。</p></a>
+      <a href="pages.html" class="nav-card"><div class="num">04</div><h3>Pages</h3><p>6 个模块：首页、问答、成长、提醒、故事、我的，桌面 + 移动双端。</p></a>
+      <a href="illustrations.html" class="nav-card"><div class="num">05</div><h3>Illustrations</h3><p>水彩绘本风参考图、AI 提示词模板、导出规格。</p></a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">09 / Delivery Checklist</div>
+    <h2>交付清单</h2>
+    <table class="timeline-table">
+      <tr><th>编号</th><th>交付物</th><th>当前状态</th><th>位置</th></tr>
+      <tr><td>D1</td><td>品牌 Logo（主标 / 单色 / 反白 / App 图标）</td><td><span class="status status-p0">已完成</span></td><td><code>kids-mind-brand/</code></td></tr>
+      <tr><td>D2</td><td>色彩系统（色板 + 语义色 + 深浅阶 + 医疗风险色）</td><td><span class="status status-p0">已完成</span></td><td><code>tokens.html / assets/tokens.css</code></td></tr>
+      <tr><td>D3</td><td>字体系统（字阶、字重、行高、中文可商用字体栈）</td><td><span class="status status-p0">已完成</span></td><td><code>tokens.html</code></td></tr>
+      <tr><td>D4</td><td>图标库（≈50 枚，24px 线性圆角 SVG）</td><td><span class="status status-p0">已完成</span></td><td><code>icons.html / assets/icons.svg</code></td></tr>
+      <tr><td>D5</td><td>组件库规范（按钮/输入/卡片/标签/弹窗/Toast/风险卡片/时间线）</td><td><span class="status status-p0">已完成</span></td><td><code>components.html</code></td></tr>
+      <tr><td>D6</td><td>插画与图像风格（参考图 + 提示词模板）</td><td><span class="status status-p0">已完成</span></td><td><code>illustrations.html</code></td></tr>
+      <tr><td>D7</td><td>6 个模块页面视觉稿（桌面 1440 + 移动 390）</td><td><span class="status status-p0">已完成</span></td><td><code>pages.html</code></td></tr>
+      <tr><td>D8</td><td>动效与交互规范</td><td><span class="status status-p1">已完成</span></td><td>见下文</td></tr>
+      <tr><td>D9</td><td>切图与图标导出包</td><td><span class="status status-p1">待补充</span></td><td>建议用 Figma/Sketch 批量导出 @1x/2x/3x</td></tr>
+      <tr><td>D10</td><td>无障碍与适配说明</td><td><span class="status status-p1">已完成</span></td><td>见下文</td></tr>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">10 / Motion</div>
+    <h2>动效规范</h2>
+    <p class="lead">所有动效仅使用 transform / opacity，避免触发重排；支持 prefers-reduced-motion 降级。</p>
+    <div class="motion-grid">
+      <div class="panel demo-hover" style="text-align:center"><div class="demo-box"></div><h4>卡片悬停上浮</h4><p style="font-size:var(--text-small);color:var(--km-ink-secondary)">translateY(-3px) + shadow-md · 250ms ease-out</p></div>
+      <div class="panel demo-press" style="text-align:center"><div class="demo-box"></div><h4>按钮按下反馈</h4><p style="font-size:var(--text-small);color:var(--km-ink-secondary)">scale(0.97) · 150ms ease-out</p></div>
+      <div class="panel" style="text-align:center"><div class="demo-box demo-fade"></div><h4>图片加载淡入</h4><p style="font-size:var(--text-small);color:var(--km-ink-secondary)">opacity 0→1 · 300ms</p></div>
+      <div class="panel" style="text-align:center"><div class="demo-box demo-shimmer"></div><h4>骨架屏闪烁</h4><p style="font-size:var(--text-small);color:var(--km-ink-secondary)">background-position 动画 · 1.5s infinite</p></div>
+    </div>
+    <table class="mini" style="margin-top:var(--space-8)">
+      <tr><th>场景</th><th>时长</th><th>曲线</th><th>属性</th></tr>
+      <tr><td>微交互（按钮、图标）</td><td>150ms</td><td>cubic-bezier(0.16,1,0.3,1)</td><td>transform / opacity</td></tr>
+      <tr><td>卡片 / 列表进场</td><td>250ms</td><td>cubic-bezier(0.16,1,0.3,1)</td><td>translateY + opacity</td></tr>
+      <tr><td>弹窗（桌面缩放 / 移动上滑）</td><td>250ms</td><td>cubic-bezier(0.16,1,0.3,1)</td><td>scale / translateY + opacity</td></tr>
+      <tr><td>Toast 进出</td><td>200ms</td><td>cubic-bezier(0.16,1,0.3,1)</td><td>translateY + opacity</td></tr>
+      <tr><td>AI 流式回答逐字</td><td>—</td><td>—</td><td>文本节点逐个 append，光标 blink 1s</td></tr>
+    </table>
+    <div class="panel" style="margin-top:var(--space-6)">
+      <h3>prefers-reduced-motion 降级</h3>
+      <pre class="code">@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}</pre>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">11 / Accessibility & Adaptation</div>
+    <h2>无障碍与适配</h2>
+    <div class="access-list">
+      <div class="access-item">
+        <h4>对比度</h4>
+        <p style="font-size:var(--text-small);color:var(--km-ink-secondary)">正文 Ink #2A3633 / 白底 12.9:1（AAA）。医疗风险色配图标冗余，色盲可辨。</p>
+      </div>
+      <div class="access-item">
+        <h4>焦点环</h4>
+        <p style="font-size:var(--text-small);color:var(--km-ink-secondary)">所有可交互元素使用 <code>outline: 2px solid var(--km-ink); outline-offset: 3px;</code>。</p>
+      </div>
+      <div class="access-item">
+        <h4>点击热区</h4>
+        <p style="font-size:var(--text-small);color:var(--km-ink-secondary)">移动端图标按钮 ≥ 44×44px；底部导航 ≥ 48px 高度。</p>
+      </div>
+      <div class="access-item">
+        <h4>表单错误</h4>
+        <p style="font-size:var(--text-small);color:var(--km-ink-secondary)">使用文案 + 图标 + 红色边框，不能仅依赖颜色。</p>
+      </div>
+      <div class="access-item">
+        <h4>断点</h4>
+        <p style="font-size:var(--text-small);color:var(--km-ink-secondary)">390（移动基准）、768（平板）、1280（桌面内容区）、1440+（大屏）。</p>
+      </div>
+      <div class="access-item">
+        <h4>深色模式</h4>
+        <p style="font-size:var(--text-small);color:var(--km-ink-secondary)"><strong>当前版本暂不支持。</strong>Token 命名已预留 dark 变体，后续可扩展，不影响当前浅色实现。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">12 / Design Decisions</div>
+    <h2>关键设计决策回应</h2>
+    <div class="grid-2">
+      <div class="panel">
+        <h3>关于现有 Token 的处理</h3>
+        <ul style="padding-left:var(--space-5);font-size:var(--text-small);color:var(--km-ink-secondary);line-height:1.8">
+          <li><strong>标题宋体：</strong>改为思源黑体 / 阿里巴巴普惠体，避免 Windows 降级 SimSun。</li>
+          <li><strong>深绿 #173c36：</strong>调整为更柔和的 Soft Ink #2A3633，与暖色卡片对比仍成立但不再刺眼。</li>
+          <li><strong>卡片密度：</strong>统一内边距 16–24px，卡片间距 16–24px，区块间距 32–48px。</li>
+          <li><strong>橙陶土主色：</strong>沿用并刷新为 #D86B4C，与 Logo 渐变协调。</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>关于品牌与产品气质</h3>
+        <ul style="padding-left:var(--space-5);font-size:var(--text-small);color:var(--km-ink-secondary);line-height:1.8">
+          <li>Logo 使用已确认的「心智萌芽」图形 + lowercase 字标。</li>
+          <li>整体视觉「专业可信、温柔不幼稚」，避免卡通化。</li>
+          <li>医疗风险使用独立色板 + 图标冗余，确保安全合规。</li>
+          <li>AI 免责声明固定样式，所有回答卡片底部强制出现。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">Kids Mind Design System v1.0 · UI Designer</div></footer>
+</body>
+</html>
