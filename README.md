@@ -1,5 +1,13 @@
 # 知芽（Kids Mind 育儿多智能体）
 
+![Python](https://img.shields.io/badge/Python-3.12-3776AB?style=flat&logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat&logo=fastapi&logoColor=white)
+![Next.js](https://img.shields.io/badge/Next.js-16-000000?style=flat&logo=nextdotjs&logoColor=white)
+![React](https://img.shields.io/badge/React-19-61DAFB?style=flat&logo=react&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat&logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?style=flat&logo=tailwindcss&logoColor=white)
+![DeepSeek](https://img.shields.io/badge/DeepSeek-4D6BFE?style=flat)
+
 > 0-3 岁新手父母的育儿助手：育儿问答 + 成长档案 + 提醒 + 数字绘本。
 
 ## 当前进度
